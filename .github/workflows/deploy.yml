@@ -25,6 +25,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # GitHub Pages preview lives at /<repo-name>. For the real domain, set the repository variable
+          # SITE_BASE_PATH to "root" (Settings > Secrets and variables > Actions > Variables).
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.SITE_BASE_PATH || '/ramanand-hospital-web' }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

@@ -29,3 +29,16 @@ Edit `src/data/integrations.ts`:
 ## Still to supply
 Real logo vector, patient-info content, lab test list, health packages, social links, hospital-approved legal text,
 and review of the Hindi translations.
+
+## Publishing on GitHub Pages
+The workflow in `.github/workflows/deploy.yml` builds the site and publishes it when `main` changes.
+
+1. **Preview first (default).** The site is published at `https://<owner>.github.io/ramanand-hospital-web/`.
+   It is built with the sub-folder `/ramanand-hospital-web` and marked "do not index", so it will not appear in search results.
+2. **Real domain later.** Once the client approves: in the repository settings add the custom domain
+   `www.ramanandhospital.com` (Settings > Pages) and set the repository variable `SITE_BASE_PATH` to `root`
+   (Settings > Secrets and variables > Actions > Variables). The next deploy is built for the domain root and is indexable.
+
+Pages must be switched on once: Settings > Pages > Build and deployment > Source: **GitHub Actions**.
+
+To test the preview build locally: set `NEXT_PUBLIC_BASE_PATH=/ramanand-hospital-web` before `npm run build`.
