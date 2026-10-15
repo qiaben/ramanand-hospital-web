@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBase } from "@/lib/base-path";
 
 /** The hospital's official crest (supplied in the requirements form), background removed. */
 export default function Logo({
@@ -11,7 +12,7 @@ export default function Logo({
   /** sm for icon-sized uses (nav, footer), md for medium, lg for hero-sized. */
   size?: "sm" | "md" | "lg";
 }) {
-  const src = { sm: "/logo-sm.webp", md: "/logo-md.webp", lg: "/logo-lg.webp" }[size];
+  const src = withBase({ sm: "/logo-sm.webp", md: "/logo-md.webp", lg: "/logo-lg.webp" }[size]);
   return (
     <Image
       src={src}
