@@ -191,6 +191,26 @@ export const ui = {
   bookCalendarSub: { en: "Choose your doctor, then pick a free slot. You will get a confirmation from Calendly.", hi: "अपना डॉक्टर चुनें, फिर खाली स्लॉट चुनें। आपको Calendly से पुष्टि मिलेगी।" },
   anyOf: { en: "Doctor", hi: "डॉक्टर" },
 
+  // Doctor profile
+  aboutDoctor: { en: "About the doctor", hi: "डॉक्टर के बारे में" },
+  treatsTitle: { en: "What this doctor can help with", hi: "यह डॉक्टर किन समस्याओं में मदद कर सकते हैं" },
+  confidenceTitle: { en: "Why you can feel at ease", hi: "आप निश्चिंत क्यों रह सकते हैं" },
+  confRegistered: { en: "Registered doctor", hi: "पंजीकृत डॉक्टर" },
+  confRegisteredText: { en: "Registered with the {council}, Reg. No. {no}.", hi: "{council} में पंजीकृत, पंजीकरण सं. {no}।" },
+  confLanguage: { en: "Speaks your language", hi: "आपकी भाषा में बात" },
+  confLanguageText: { en: "Consults in {langs}.", hi: "{langs} में परामर्श।" },
+  confTests: { en: "Tests and medicines on site", hi: "जाँच और दवाइयाँ परिसर में" },
+  confTestsText: { en: "In-house laboratory and pharmacy, so you do not have to go elsewhere.", hi: "इन-हाउस प्रयोगशाला और फार्मेसी, ताकि आपको कहीं और न जाना पड़े।" },
+  confFees: { en: "No online payment", hi: "ऑनलाइन भुगतान नहीं" },
+  confFeesText: { en: "You request a time here and the team confirms it with you. Fees are handled at the hospital.", hi: "आप यहाँ समय का अनुरोध करते हैं और टीम आपसे पुष्टि करती है। शुल्क अस्पताल में ही लिया जाता है।" },
+  needHelp: { en: "Not sure this is the right doctor? Call us and we will guide you.", hi: "क्या आप निश्चित नहीं हैं कि यही सही डॉक्टर हैं? हमें कॉल करें, हम मार्गदर्शन करेंगे।" },
+
+  // Facility detail pages
+  goodToKnow: { en: "Good to know", hi: "जानने योग्य बातें" },
+  otherFacilities: { en: "Other facilities", hi: "अन्य सुविधाएँ" },
+  viewFacility: { en: "View details", hi: "विवरण देखें" },
+  facHelp: { en: "Have a question about this facility? Call us and we will help.", hi: "इस सुविधा के बारे में कोई प्रश्न है? हमें कॉल करें, हम मदद करेंगे।" },
+
   // Footer and legal
   quickLinks: { en: "Quick links", hi: "त्वरित लिंक" },
   privacy: { en: "Privacy notice", hi: "गोपनीयता सूचना" },

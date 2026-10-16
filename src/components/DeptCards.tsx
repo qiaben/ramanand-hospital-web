@@ -29,7 +29,7 @@ export default function DeptCards({ lang }: { lang: Lang }) {
                 <h3 className="mt-5 text-2xl text-blue-950">{tr(d.name, lang)}</h3>
                 <p className="mt-2 leading-relaxed text-muted">{tr(d.short, lang)}</p>
 
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-5 space-y-2.5 pb-6">
                   {trl(d.treatments, lang).slice(0, 3).map((x) => (
                     <li key={x} className="flex gap-2.5 text-[15px] text-blue-950/85">
                       <Check className={`mt-1 h-4 w-4 shrink-0 ${t.tick}`} strokeWidth={3} aria-hidden />

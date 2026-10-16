@@ -50,15 +50,15 @@ export default function CrestOrbit() {
         </div>
 
         {/* floating facts */}
-        <div className="card animate-drift absolute left-0 top-[12%] rounded-xl px-3.5 py-2">
+        <div className="card animate-drift absolute left-0 top-0 rounded-xl px-3 py-1.5 sm:top-[12%] sm:px-3.5 sm:py-2">
           <p className="text-[10px] font-bold uppercase tracking-wider text-green-700">{lang === "en" ? "Day Care" : "डे केयर"}</p>
           <p className="text-sm font-bold text-blue-950">{lang === "en" ? "5 beds" : "5 बिस्तर"}</p>
         </div>
-        <div className="card animate-drift absolute right-0 top-[26%] flex items-center gap-2.5 rounded-xl px-3.5 py-2 [animation-delay:-3s]">
+        <div className="card animate-drift absolute right-0 top-[4%] flex items-center gap-2 rounded-xl px-3 py-1.5 [animation-delay:-3s] sm:top-[26%] sm:gap-2.5 sm:px-3.5 sm:py-2">
           <FlaskConical className="h-5 w-5 text-green-700" aria-hidden />
           <p className="text-sm font-bold text-blue-950">{lang === "en" ? "Lab & Pharmacy" : "लैब एवं फार्मेसी"}</p>
         </div>
-        <div className="card animate-drift absolute bottom-[8%] right-[4%] rounded-xl px-3.5 py-2 [animation-delay:-5s]">
+        <div className="card animate-drift absolute bottom-0 right-[4%] rounded-xl px-3 py-1.5 [animation-delay:-5s] sm:bottom-[8%] sm:px-3.5 sm:py-2">
           <p className="text-[10px] font-bold uppercase tracking-wider text-green-700">{u("opd", lang)}</p>
           <p className="text-sm font-bold text-blue-950">{lang === "en" ? "6 PM – 10 PM" : "शाम 6 – रात 10"}</p>
         </div>

@@ -44,7 +44,7 @@ export default function Hero() {
       <div ref={ref} className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-36 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pb-44 lg:pt-16">
         <motion.div style={{ y: yText }}>
           <motion.div {...up(0)}><Eyebrow>{u("heroEyebrow", lang)}</Eyebrow></motion.div>
-          <h1 className="mt-4 text-[clamp(2.4rem,5.2vw,4.1rem)] leading-[1.1] text-blue-950" aria-label={tr(site.tagline, lang)}>
+          <h1 className="mt-4 text-[clamp(2.7rem,6.4vw,4.1rem)] leading-[1.08] text-blue-950" aria-label={tr(site.tagline, lang)}>
             <Words text={a} immediate delay={0.1} />{" "}
             <Words text={b} immediate delay={0.3} wordClass="text-grad" />
           </h1>

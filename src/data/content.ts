@@ -297,6 +297,8 @@ export type Doctor = {
   registration: string;
   council: L;
   languages: LL;
+  /** Patient-facing introduction. Uses only facts the hospital supplied; the Hindi text needs the hospital's review. */
+  about: LL;
 };
 
 export const doctors: Doctor[] = [
@@ -314,6 +316,18 @@ export const doctors: Doctor[] = [
       en: ["Hindi", "English", "Haryanvi", "Marathi", "Punjabi"],
       hi: ["हिंदी", "अंग्रेज़ी", "हरियाणवी", "मराठी", "पंजाबी"],
     },
+    about: {
+      en: [
+        "Dr. Arun Kumar is the General Practice physician at Ramanand Hospital, and the hospital's owner. He holds an MBBS and an MD, has 5 years of experience, and heads the General Practice & Internal Medicine department.",
+        "Patients come to him as their first point of care: for fevers and infections, for long-term conditions such as diabetes, high blood pressure, thyroid problems and asthma, and for health checks for adults and senior citizens. He speaks Hindi, English, Haryanvi, Marathi and Punjabi, so you can explain your problem in the language you are most comfortable with.",
+        "He is registered with the Maharashtra Medical Council (Reg. No. 2022087430). You can meet him in OPD, Monday to Saturday, 6 PM to 10 PM.",
+      ],
+      hi: [
+        "डॉ. अरुण कुमार रामानंद हॉस्पिटल में जनरल प्रैक्टिस चिकित्सक हैं और अस्पताल के स्वामी भी। उनके पास MBBS और MD की योग्यता है, 5 वर्ष का अनुभव है, और वे जनरल प्रैक्टिस एवं इंटरनल मेडिसिन विभाग के प्रमुख हैं।",
+        "मरीज़ इलाज के लिए सबसे पहले उनके पास आते हैं: बुखार और संक्रमण के लिए, मधुमेह, उच्च रक्तचाप, थायरॉइड और अस्थमा जैसी लंबी बीमारियों के लिए, और वयस्कों व वरिष्ठ नागरिकों की स्वास्थ्य जाँच के लिए। वे हिंदी, अंग्रेज़ी, हरियाणवी, मराठी और पंजाबी बोलते हैं, इसलिए आप अपनी समस्या अपनी सहज भाषा में बता सकते हैं।",
+        "वे महाराष्ट्र मेडिकल काउंसिल में पंजीकृत हैं (पंजीकरण सं. 2022087430)। आप उनसे ओपीडी में सोमवार से शनिवार, शाम 6 बजे से रात 10 बजे तक मिल सकते हैं।",
+      ],
+    },
   },
   {
     slug: "shikha-siwach",
@@ -328,6 +342,18 @@ export const doctors: Doctor[] = [
     languages: {
       en: ["Hindi", "English", "Haryanvi", "Punjabi"],
       hi: ["हिंदी", "अंग्रेज़ी", "हरियाणवी", "पंजाबी"],
+    },
+    about: {
+      en: [
+        "Dr. Shikha Siwach looks after Obstetrics and Gynecology at Ramanand Hospital and heads the department. She holds an MBBS and has 2 years of experience.",
+        "Women come to her for care at every stage of life: normal and assisted vaginal deliveries, antenatal and postnatal care and counselling, high-risk pregnancy management, and routine gynecological check-ups. She speaks Hindi, English, Haryanvi and Punjabi, so you can talk to her openly and comfortably.",
+        "She is registered with the Delhi Medical Council (Reg. No. 114852). You can meet her in OPD, Monday to Saturday, 6 PM to 10 PM.",
+      ],
+      hi: [
+        "डॉ. शिखा सिवाच रामानंद हॉस्पिटल में प्रसूति एवं स्त्री रोग विभाग देखती हैं और विभाग की प्रमुख हैं। उनके पास MBBS की योग्यता और 2 वर्ष का अनुभव है।",
+        "महिलाएँ जीवन के हर चरण में उनके पास आती हैं: सामान्य एवं सहायता-प्राप्त प्रसव, प्रसव-पूर्व एवं प्रसवोत्तर देखभाल व परामर्श, उच्च-जोखिम गर्भावस्था प्रबंधन, और नियमित स्त्री रोग जाँच के लिए। वे हिंदी, अंग्रेज़ी, हरियाणवी और पंजाबी बोलती हैं, इसलिए आप उनसे खुलकर और सहजता से बात कर सकती हैं।",
+        "वे दिल्ली मेडिकल काउंसिल में पंजीकृत हैं (पंजीकरण सं. 114852)। आप उनसे ओपीडी में सोमवार से शनिवार, शाम 6 बजे से रात 10 बजे तक मिल सकती हैं।",
+      ],
     },
   },
 ];
