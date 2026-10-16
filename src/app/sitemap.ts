@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { departments, doctors, site } from "@/data/content";
+import { departments, doctors, facilities, site } from "@/data/content";
 import { locales } from "@/lib/i18n";
 import { isPreview } from "@/lib/base-path";
 
@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "", "/about", "/departments", "/doctors", "/facilities", "/patient-info", "/appointment", "/contact", "/privacy", "/disclaimer",
     ...departments.map((d) => `/departments/${d.slug}`),
     ...doctors.map((d) => `/doctors/${d.slug}`),
+    ...facilities.map((f) => `/facilities/${f.key}`),
   ];
   return locales.flatMap((lang) =>
     pages.map((p) => ({
