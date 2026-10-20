@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, BedDouble, CalendarCheck, Check, Info, Microscope, Phone, Pill } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BedDouble, CalendarCheck, FlaskConical, Check, Info, Microscope, Phone, Pill } from "lucide-react";
 import { facilities, site } from "@/data/content";
 import { facilityDetails } from "@/data/facility-details";
 import { u } from "@/data/ui";
@@ -62,6 +62,18 @@ export default async function Page({ params }: PageProps<"/[lang]/facilities/[sl
               <Phone className="h-4 w-4 text-green-600" aria-hidden /> {site.phoneDisplay}
             </a>
           </Reveal>
+          {f.key === "lab" && (
+            <Reveal delay={0.1} className="mt-8">
+              <div className="rounded-3xl border border-green-200 bg-green-50 p-5 sm:p-6">
+                <p className="text-[15px] leading-relaxed text-blue-950/85">{u("bookLabNote", lang)}</p>
+                <Link href={`/${lang}/lab-booking`} className="btn btn-green group mt-4 py-4!">
+                  <FlaskConical className="h-5 w-5" aria-hidden />
+                  {u("bookLabTest", lang)}
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                </Link>
+              </div>
+            </Reveal>
+          )}
         </div>
 
         <Reveal delay={0.1}>

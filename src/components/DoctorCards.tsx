@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Clock, Languages } from "lucide-react";
-import { deptBySlug, doctors, site } from "@/data/content";
+import { deptBySlug, doctors, listedDoctors, site } from "@/data/content";
 import { u } from "@/data/ui";
 import { tr, trl, type Lang } from "@/lib/i18n";
 import Reveal from "./Reveal";
@@ -66,6 +66,23 @@ export default function DoctorCards({ lang }: { lang: Lang }) {
                 </div>
               </Link>
             </Tilt>
+          </Reveal>
+        );
+      })}
+      {listedDoctors.map((d, i) => {
+        const tone = (doctors.length + i) % 2 === 0 ? "blue" : "green";
+        return (
+          <Reveal key={d.key} delay={(doctors.length + i) * 0.1} className="h-full lg:last:odd:col-span-2 lg:last:odd:mx-auto lg:last:odd:w-[calc(50%-0.75rem)]">
+            <div className="card flex h-full flex-col gap-6 p-6 sm:flex-row sm:p-7">
+              <Portrait initials={tr(d.initials, lang)} tone={tone} />
+              <div className="flex flex-1 flex-col justify-center">
+                <p className={`text-xs font-bold uppercase tracking-[0.14em] ${tone === "blue" ? "text-blue-600" : "text-green-700"}`}>{tr(d.field, lang)}</p>
+                <h3 className="mt-1.5 text-2xl text-blue-950">{tr(d.name, lang)}</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="rounded-md bg-blue-50 px-2.5 py-1 text-sm font-semibold text-blue-700">{d.qualification}</span>
+                </div>
+              </div>
+            </div>
           </Reveal>
         );
       })}

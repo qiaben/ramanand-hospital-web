@@ -18,6 +18,15 @@ export default function Footer({ lang }: { lang: Lang }) {
             </div>
             <p className="mt-5 text-lg font-semibold text-white/90">{tr(site.tagline, lang)}</p>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">{u("footerNote", lang)}</p>
+            <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-lime">{u("followUs", lang)}</p>
+            <div className="mt-3 flex gap-3">
+              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 transition hover:bg-white hover:text-blue-700">
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21h3z" /></svg>
+              </a>
+              <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 transition hover:bg-white hover:text-red-600">
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z" /></svg>
+              </a>
+            </div>
           </div>
 
           <div>
@@ -30,6 +39,9 @@ export default function Footer({ lang }: { lang: Lang }) {
               ))}
               <li>
                 <Link href={`/${lang}/appointment`} className="font-semibold text-lime">{u("requestAppt", lang)}</Link>
+              </li>
+              <li>
+                <Link href={`/${lang}/lab-booking`} className="font-semibold text-lime">{u("bookLabTest", lang)}</Link>
               </li>
             </ul>
           </div>
