@@ -17,8 +17,8 @@ export const privacy: { title: L; intro: L; sections: Section[] } = {
     {
       h: { en: "Who we are", hi: "हम कौन हैं" },
       p: {
-        en: "Ramanand Hospital, an individual proprietorship, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana – 131103. Phone: 74044 77208. Email: ramanandhosp@gmail.com.",
-        hi: "रामानंद हॉस्पिटल, एक व्यक्तिगत स्वामित्व (प्रोप्राइटरशिप), सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा – 131103। फ़ोन: 74044 77208। ईमेल: ramanandhosp@gmail.com।",
+        en: "Ramanand Hospital, an individual proprietorship, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103. Phone: 74044 77208. Email: ramanandhosp@gmail.com.",
+        hi: "रामानंद हॉस्पिटल, एक व्यक्तिगत स्वामित्व (प्रोप्राइटरशिप), सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा 131103। फ़ोन: 74044 77208। ईमेल: ramanandhosp@gmail.com।",
       },
     },
     {

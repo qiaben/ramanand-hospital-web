@@ -3,11 +3,10 @@ import Reveal, { Words } from "./Reveal";
 export function Eyebrow({ children, tone = "light" }: { n?: string; children: React.ReactNode; tone?: "light" | "dark" }) {
   return (
     <p
-      className={`inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.18em] ${
+      className={`inline-flex items-center text-xs font-bold uppercase tracking-[0.18em] ${
         tone === "dark" ? "text-lime" : "text-green-700"
       }`}
     >
-      <span className={`h-0.5 w-7 rounded-full ${tone === "dark" ? "bg-lime" : "bg-linear-to-r from-blue-500 to-green-500"}`} />
       {children}
     </p>
   );

@@ -48,13 +48,13 @@ export const ui = {
   getDirections: { en: "Get directions", hi: "रास्ता देखें" },
   qaApptSub: { en: "Choose a doctor and a day", hi: "डॉक्टर और दिन चुनें" },
   qaDoctorSub: { en: "Meet our doctors", hi: "हमारे डॉक्टरों से मिलें" },
-  qaMapSub: { en: "Sonipat–Narela Road", hi: "सोनीपत–नरेला रोड" },
+  qaMapSub: { en: "Sonipat-Narela Road", hi: "सोनीपत-नरेला रोड" },
   readMore: { en: "Read the full message", hi: "पूरा संदेश पढ़ें" },
   stepsEyebrow: { en: "How it works", hi: "प्रक्रिया" },
   stepsTitle: { en: "Request an appointment in four steps.", hi: "चार चरणों में अपॉइंटमेंट का अनुरोध।" },
   stepsSub: { en: "No online payment. Fees are handled at the hospital.", hi: "ऑनलाइन भुगतान नहीं। शुल्क अस्पताल में ही लिया जाता है।" },
   visitEyebrow: { en: "Visit us", hi: "हमसे मिलें" },
-  visitTitle: { en: "Find us on Sonipat–Narela Road.", hi: "सोनीपत–नरेला रोड पर हमें खोजें।" },
+  visitTitle: { en: "Find us on Sonipat-Narela Road.", hi: "सोनीपत-नरेला रोड पर हमें खोजें।" },
   mapSatellite: { en: "Satellite", hi: "सैटेलाइट" },
   mapRoad: { en: "Map", hi: "नक्शा" },
   mapTitle: { en: "Ramanand Hospital on Google Maps", hi: "Google Maps पर रामानंद हॉस्पिटल" },
@@ -204,6 +204,15 @@ export const ui = {
   confFees: { en: "No online payment", hi: "ऑनलाइन भुगतान नहीं" },
   confFeesText: { en: "You request a time here and the team confirms it with you. Fees are handled at the hospital.", hi: "आप यहाँ समय का अनुरोध करते हैं और टीम आपसे पुष्टि करती है। शुल्क अस्पताल में ही लिया जाता है।" },
   needHelp: { en: "Not sure this is the right doctor? Call us and we will guide you.", hi: "क्या आप निश्चित नहीं हैं कि यही सही डॉक्टर हैं? हमें कॉल करें, हम मार्गदर्शन करेंगे।" },
+
+  labPharmacyHours: { en: "Lab & pharmacy hours", hi: "प्रयोगशाला और फार्मेसी का समय" },
+  openingHours: { en: "Opening hours", hi: "खुलने का समय" },
+
+  prevSlide: { en: "Previous", hi: "पिछला" },
+  nextSlide: { en: "Next", hi: "अगला" },
+  pauseSlides: { en: "Pause slideshow", hi: "स्लाइडशो रोकें" },
+  playSlides: { en: "Play slideshow", hi: "स्लाइडशो चलाएँ" },
+  slideOf: { en: "{n} of {total}", hi: "{total} में से {n}" },
 
   // Facility detail pages
   goodToKnow: { en: "Good to know", hi: "जानने योग्य बातें" },

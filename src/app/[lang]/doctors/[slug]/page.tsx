@@ -60,7 +60,6 @@ export default async function Page({ params }: PageProps<"/[lang]/doctors/[slug]
         <div>
           <Reveal>
             <p className="inline-flex items-center gap-3 text-[11.5px] font-bold uppercase tracking-[0.24em] text-green-600">
-              <span className="h-px w-8 bg-green-500/60" />
               {u("aboutDoctor", lang)}
             </p>
           </Reveal>

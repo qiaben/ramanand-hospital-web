@@ -49,6 +49,11 @@ export default function Footer({ lang }: { lang: Lang }) {
               <Clock className="mt-1 h-4 w-4 shrink-0 text-lime" aria-hidden />
               {tr(site.opdText, lang)}
             </p>
+            <h2 className={`${h} mt-6`}>{u("labPharmacyHours", lang)}</h2>
+            <p className="mt-4 flex gap-3 text-[15px]">
+              <Clock className="mt-1 h-4 w-4 shrink-0 text-lime" aria-hidden />
+              {tr(site.labPharmacyText, lang)}
+            </p>
           </div>
         </div>
 

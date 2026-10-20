@@ -285,6 +285,18 @@ h3 {
 }
 
 /* ---------- Motion (kept small and slow) ---------- */
+@keyframes slide-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.slide-fill {
+  transform-origin: left;
+  animation: slide-fill var(--slide-ms, 7000ms) linear forwards;
+}
 @keyframes drift {
   0%,
   100% {

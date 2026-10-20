@@ -7,7 +7,7 @@ import { hasLocale } from "@/lib/i18n";
 import Hero from "@/components/Hero";
 import QuickActions from "@/components/QuickActions";
 import AboutIntro from "@/components/AboutIntro";
-import PillarsScene from "@/components/PillarsScene";
+import PillarsCoverflow from "@/components/PillarsCoverflow";
 import DeptCards from "@/components/DeptCards";
 import DoctorCards from "@/components/DoctorCards";
 import FacilityGrid from "@/components/FacilityGrid";
@@ -57,7 +57,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <Hero />
       <QuickActions />
       <AboutIntro />
-      <PillarsScene />
+      <PillarsCoverflow />
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
         <SectionHead center eyebrow={u("deptEyebrow", lang)} title={u("deptTitle", lang)} sub={u("deptSub", lang)} />
