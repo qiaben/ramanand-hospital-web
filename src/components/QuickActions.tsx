@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CalendarCheck, MapPin, Phone, Stethoscope } from "lucide-react";
+import { CalendarCheck, FlaskConical, MapPin, Phone, Stethoscope } from "lucide-react";
 import { site } from "@/data/content";
 import { u } from "@/data/ui";
 import { useLang } from "@/lib/lang-context";
@@ -12,13 +12,14 @@ export default function QuickActions() {
   const lang = useLang();
   const items = [
     { icon: CalendarCheck, title: u("requestAppt", lang), sub: u("qaApptSub", lang), href: `/${lang}/appointment`, tone: "green" },
+    { icon: FlaskConical, title: u("bookLabTest", lang), sub: u("qaLabSub", lang), href: `/${lang}/lab-booking`, tone: "green" },
     { icon: Stethoscope, title: u("findDoctor", lang), sub: u("qaDoctorSub", lang), href: `/${lang}/doctors`, tone: "blue" },
     { icon: Phone, title: u("callUs", lang), sub: site.phoneDisplay, href: `tel:${site.tel}`, tone: "green" },
     { icon: MapPin, title: u("getDirections", lang), sub: u("qaMapSub", lang), href: site.mapUrl, tone: "blue", external: true },
   ];
   return (
     <section className="relative z-10 mx-auto -mt-14 max-w-7xl px-5">
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 sm:max-lg:[&>li:last-child:nth-child(odd)]:col-span-2">
         {items.map((it, i) => {
           const Icon = it.icon;
           const inner = (
@@ -28,7 +29,7 @@ export default function QuickActions() {
               </span>
               <span className="min-w-0">
                 <span className="block font-bold text-blue-950">{it.title}</span>
-                <span className="mt-0.5 block truncate text-sm text-muted">{it.sub}</span>
+                <span className="mt-0.5 block text-sm leading-snug text-muted">{it.sub}</span>
               </span>
             </>
           );

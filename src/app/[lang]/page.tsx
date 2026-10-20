@@ -11,6 +11,7 @@ import PillarsCoverflow from "@/components/PillarsCoverflow";
 import DeptCards from "@/components/DeptCards";
 import DoctorCards from "@/components/DoctorCards";
 import FacilityGrid from "@/components/FacilityGrid";
+import LabBand from "@/components/LabBand";
 import MessageBand from "@/components/MessageBand";
 import JourneyLine from "@/components/JourneyLine";
 import VisitBlock from "@/components/VisitBlock";
@@ -77,6 +78,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <SectionHead center eyebrow={u("facEyebrow", lang)} title={u("facTitle", lang)} />
         <div className="mt-12"><FacilityGrid lang={lang} /></div>
       </section>
+
+      <LabBand lang={lang} />
 
       <MessageBand lang={lang} />
 

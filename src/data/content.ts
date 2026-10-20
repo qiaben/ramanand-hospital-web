@@ -21,6 +21,9 @@ export const site = {
     en: "Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103",
     hi: "सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा 131103",
   } satisfies L,
+  // The hospital's social pages.
+  youtubeUrl: "https://youtube.com/@medikalguruji",
+  facebookUrl: "https://www.facebook.com/share/g/1CqdT58fcP/",
   mapUrl: "https://maps.app.goo.gl/CzDuUPwdhQ2y9m826",
   // Exact pin of "Ramanand Hospital" from the client's Google Maps link (resolved from the short link).
   coords: { lat: 28.9074552, lng: 77.0670583 },
@@ -357,6 +360,23 @@ export const doctors: Doctor[] = [
         "वे दिल्ली मेडिकल काउंसिल में पंजीकृत हैं (पंजीकरण सं. 114852)। आप उनसे ओपीडी में सोमवार से शनिवार, शाम 6 बजे से रात 10 बजे तक मिल सकती हैं।",
       ],
     },
+  },
+];
+
+/**
+ * Doctors who are shown in the doctors list only. They have no profile page and cannot be booked online,
+ * so nothing here is linked to a department, a doctor page or the appointment form. Only the details the
+ * hospital supplied are held: name and qualification.
+ */
+export type ListedDoctor = { key: string; initials: L; name: L; qualification: string; field: L };
+
+export const listedDoctors: ListedDoctor[] = [
+  {
+    key: "robin-tyagi",
+    initials: { en: "RT", hi: "रॉ" },
+    name: { en: "Dr. Robin Tyagi", hi: "डॉ. रॉबिन त्यागी" },
+    qualification: "MBBS, MS Orthopedics",
+    field: { en: "Orthopedics", hi: "अस्थि रोग (ऑर्थोपेडिक्स)" },
   },
 ];
 

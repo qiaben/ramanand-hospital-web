@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (isPreview) return [];
   const base = `https://${site.domain}`;
   const pages = [
-    "", "/about", "/departments", "/doctors", "/facilities", "/patient-info", "/appointment", "/contact", "/privacy", "/disclaimer",
+    "", "/about", "/departments", "/doctors", "/facilities", "/patient-info", "/appointment", "/lab-booking", "/contact", "/privacy", "/disclaimer",
     ...departments.map((d) => `/departments/${d.slug}`),
     ...doctors.map((d) => `/doctors/${d.slug}`),
     ...facilities.map((f) => `/facilities/${f.key}`),

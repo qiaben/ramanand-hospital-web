@@ -7,3 +7,16 @@ export const windows = [
 ] as const;
 
 export const windowLabel = (v: string, lang: "en" | "hi") => windows.find((w) => w.v === v)?.[lang] ?? v;
+
+// The laboratory is open 10 AM to 10 PM, so patients pick an hourly window within that time.
+export const labWindows = Array.from({ length: 12 }, (_, i) => {
+  const a = 10 + i;
+  const b = a + 1;
+  const h12 = (h: number) => (h % 12 === 0 ? 12 : h % 12);
+  const part = (h: number) => (h < 12 ? "सुबह" : h < 17 ? "दोपहर" : h < 20 ? "शाम" : "रात");
+  return {
+    v: `${a}-${b}`,
+    en: `${h12(a)} ${a < 12 ? "AM" : "PM"} to ${h12(b)} ${b < 12 ? "AM" : "PM"}`,
+    hi: `${part(a)} ${h12(a)} से ${h12(b)} बजे`,
+  };
+});
