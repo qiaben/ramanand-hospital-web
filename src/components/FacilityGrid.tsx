@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, BedDouble, Microscope, Pill } from "lucide-react";
-import { facilities } from "@/data/content";
+import { ArrowRight, BedDouble, Clock, Microscope, Pill } from "lucide-react";
+import { facilities, site } from "@/data/content";
 import { u } from "@/data/ui";
 import { tr, type Lang } from "@/lib/i18n";
 import Reveal from "./Reveal";
@@ -32,6 +32,11 @@ export default function FacilityGrid({ lang }: { lang: Lang }) {
                 </div>
                 <h3 className="mt-5 text-xl text-blue-950">{tr(f.title, lang)}</h3>
                 <p className="mt-2 leading-relaxed text-muted">{tr(f.text, lang)}</p>
+                {"hours" in f && f.hours && (
+                  <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-900">
+                    <Clock className="h-4 w-4 text-green-700" aria-hidden /> {tr(site.labPharmacyText, lang)}
+                  </p>
+                )}
                 <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-bold text-blue-700">
                   {u("viewFacility", lang)}
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />

@@ -1,7 +1,7 @@
 /**
  * All hospital content, in English and Hindi.
  *
- * Source: "Ramanand Hospital: Website Creation – Requirements & Content Collection" form.
+ * Source: "Ramanand Hospital: Website Creation, Requirements & Content Collection" form.
  * English text is the client's own wording. Hindi text is our translation and must be
  * reviewed by the hospital before launch.
  * Anything marked PENDING has not been supplied yet and shows an "updating soon" note.
@@ -18,8 +18,8 @@ export const site = {
   tel: "+917404477208",
   email: "ramanandhosp@gmail.com",
   address: {
-    en: "Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana – 131103",
-    hi: "सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा – 131103",
+    en: "Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103",
+    hi: "सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा 131103",
   } satisfies L,
   mapUrl: "https://maps.app.goo.gl/CzDuUPwdhQ2y9m826",
   // Exact pin of "Ramanand Hospital" from the client's Google Maps link (resolved from the short link).
@@ -27,7 +27,9 @@ export const site = {
   opdDays: [1, 2, 3, 4, 5, 6], // Monday to Saturday
   opdStartHour: 18,
   opdEndHour: 22,
-  opdText: { en: "Mon–Sat · 6 PM – 10 PM", hi: "सोम–शनि · शाम 6 बजे – रात 10 बजे" } satisfies L,
+  // Laboratory and pharmacy are open longer than OPD.
+  labPharmacyText: { en: "10 AM to 10 PM", hi: "सुबह 10 बजे से रात 10 बजे" } satisfies L,
+  opdText: { en: "Mon to Sat · 6 PM to 10 PM", hi: "सोम से शनि · शाम 6 बजे से रात 10 बजे" } satisfies L,
   grievance: { name: { en: "Dr. Arun Kumar", hi: "डॉ. अरुण कुमार" } satisfies L },
   social: [] as { label: string; href: string }[], // PENDING: none supplied
 };
@@ -178,7 +180,7 @@ export const about = {
   team: [
     { name: { en: "Dr. Arun Kumar", hi: "डॉ. अरुण कुमार" }, role: { en: "Owner", hi: "स्वामी" }, doctor: "arun-kumar" },
     { name: { en: "Dr. Shikha Siwach", hi: "डॉ. शिखा सिवाच" }, role: { en: "Obstetrics and Gynecology", hi: "प्रसूति एवं स्त्री रोग" }, doctor: "shikha-siwach" },
-    { name: { en: "Dr. Robin Tyagi", hi: "डॉ. रॉबिन त्यागी" }, role: { en: "Management team", hi: "प्रबंधन टीम" } },
+    { name: { en: "Dr. Robin Tyagi", hi: "डॉ. रॉबिन त्यागी" }, role: { en: "Doctor", hi: "डॉक्टर" } },
     { name: { en: "Mr. Hritik Pal", hi: "श्री हृतिक पाल" }, role: { en: "Pharmacist", hi: "फार्मासिस्ट" } },
   ] as { name: L; role: L; doctor?: string }[],
 };
@@ -371,6 +373,7 @@ export const facilities = [
   {
     key: "lab",
     stat: "Lab",
+    hours: true,
     title: { en: "Laboratory & Diagnostics", hi: "प्रयोगशाला एवं जाँच" },
     text: {
       en: "In-house clinical laboratory covering Microbiology, Biochemistry and Hematology, with ECG.",
@@ -380,6 +383,7 @@ export const facilities = [
   {
     key: "pharmacy",
     stat: "Rx",
+    hours: true,
     title: { en: "Pharmacy", hi: "फार्मेसी" },
     text: { en: "On-site pharmacy. Pharmacist: Mr. Hritik Pal.", hi: "परिसर में फार्मेसी। फार्मासिस्ट: श्री हृतिक पाल।" },
   },
@@ -408,6 +412,10 @@ export const faqs = [
   {
     q: { en: "What are the OPD timings?", hi: "ओपीडी का समय क्या है?" },
     a: { en: "OPD is open Monday to Saturday, 6 PM to 10 PM.", hi: "ओपीडी सोमवार से शनिवार, शाम 6 बजे से रात 10 बजे तक खुली रहती है।" },
+  },
+  {
+    q: { en: "What are the laboratory and pharmacy timings?", hi: "प्रयोगशाला और फार्मेसी का समय क्या है?" },
+    a: { en: "The laboratory and the pharmacy are open from 10 AM to 10 PM.", hi: "प्रयोगशाला और फार्मेसी सुबह 10 बजे से रात 10 बजे तक खुली रहती हैं।" },
   },
   {
     q: { en: "How do I request an appointment?", hi: "अपॉइंटमेंट के लिए अनुरोध कैसे करें?" },

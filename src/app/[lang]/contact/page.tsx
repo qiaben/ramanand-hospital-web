@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps<"/[lang]/contact">) {
     { icon: Mail, k: u("email", lang), v: site.email, href: `mailto:${site.email}` },
     { icon: MapPin, k: u("address", lang), v: tr(site.address, lang) },
     { icon: Clock, k: u("timings", lang), v: tr(site.opdText, lang) },
+    { icon: Clock, k: u("labPharmacyHours", lang), v: tr(site.labPharmacyText, lang) },
   ];
 
   // The client gave one number for reception, appointments, emergency and ambulance.

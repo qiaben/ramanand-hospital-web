@@ -60,7 +60,7 @@ export default function CrestOrbit() {
         </div>
         <div className="card animate-drift absolute bottom-0 right-[4%] rounded-xl px-3 py-1.5 [animation-delay:-5s] sm:bottom-[8%] sm:px-3.5 sm:py-2">
           <p className="text-[10px] font-bold uppercase tracking-wider text-green-700">{u("opd", lang)}</p>
-          <p className="text-sm font-bold text-blue-950">{lang === "en" ? "6 PM – 10 PM" : "शाम 6 – रात 10"}</p>
+          <p className="text-sm font-bold text-blue-950">{lang === "en" ? "6 PM to 10 PM" : "शाम 6 से रात 10 बजे"}</p>
         </div>
       </div>
     </Tilt>

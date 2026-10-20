@@ -1,8 +1,9 @@
 /**
  * Detail pages for each facility. Everything here comes from facts the hospital supplied
  * (5 day-care beds, the lab's Microbiology / Biochemistry / Hematology / ECG, the on-site pharmacy and
- * its pharmacist) or is plain explanatory wording. Nothing about timings, prices or test lists is invented:
- * where the hospital has not supplied something, the page says so and points to the phone number.
+ * its pharmacist, lab and pharmacy hours of 10 AM to 10 PM) or is plain explanatory wording. Nothing about
+ * prices or test lists is invented: where the hospital has not supplied something, the page says so and
+ * points to the phone number. Day Care hours have not been supplied, so none are shown for it.
  * Hindi text is our translation and needs the hospital's review.
  */
 import type { L, LL } from "@/lib/i18n";
@@ -70,6 +71,7 @@ export const facilityDetails: Record<string, FacilityDetail> = {
     },
     facts: [
       { k: { en: "Test areas", hi: "जाँच के क्षेत्र" }, v: { en: "Microbiology · Biochemistry · Hematology · ECG", hi: "माइक्रोबायोलॉजी · बायोकेमिस्ट्री · हेमेटोलॉजी · ECG" } },
+      { k: { en: "Opening hours", hi: "खुलने का समय" }, v: { en: "10 AM to 10 PM", hi: "सुबह 10 बजे से रात 10 बजे" } },
       { k: { en: "Type", hi: "प्रकार" }, v: { en: "In-house clinical laboratory", hi: "इन-हाउस नैदानिक प्रयोगशाला" } },
     ],
     offersTitle: { en: "What our laboratory covers", hi: "हमारी प्रयोगशाला में क्या होता है" },
@@ -111,6 +113,7 @@ export const facilityDetails: Record<string, FacilityDetail> = {
     },
     facts: [
       { k: { en: "Pharmacist", hi: "फार्मासिस्ट" }, v: { en: "Mr. Hritik Pal", hi: "श्री हृतिक पाल" } },
+      { k: { en: "Opening hours", hi: "खुलने का समय" }, v: { en: "10 AM to 10 PM", hi: "सुबह 10 बजे से रात 10 बजे" } },
       { k: { en: "Location", hi: "स्थान" }, v: { en: "On site, inside the hospital", hi: "परिसर में, अस्पताल के भीतर" } },
     ],
     offersTitle: { en: "What you can expect at our pharmacy", hi: "हमारी फार्मेसी में आप क्या उम्मीद कर सकते हैं" },

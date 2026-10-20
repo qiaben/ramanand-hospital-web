@@ -250,7 +250,7 @@ export default function AppointmentForm() {
               <div className="sm:col-span-2">
                 <label htmlFor="date" className={label}>{u("fDate", lang)} *</label>
                 <input id="date" type="date" ref={dateRef} className={field} value={v.date} onChange={(e) => set("date", e.target.value)} />
-                <p className="mt-2 text-xs text-muted">{u("opd", lang)}: {lang === "en" ? "Mon–Sat, 6 PM – 10 PM" : "सोम–शनि, शाम 6 – रात 10 बजे"}</p>
+                <p className="mt-2 text-xs text-muted">{u("opd", lang)}: {lang === "en" ? "Mon to Sat, 6 PM to 10 PM" : "सोम से शनि, शाम 6 से रात 10 बजे"}</p>
                 {err("date")}
               </div>
               <div className="sm:col-span-2">
