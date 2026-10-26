@@ -15,7 +15,7 @@ database_id = "PASTE_THE_ID_HERE"
 
 [vars]
 # Websites allowed to call this service, comma separated.
-ALLOWED_ORIGINS = "https://www.ramanandhospital.com,http://localhost:3000"
+ALLOWED_ORIGINS = "https://www.ramanandhospital.com,https://qiaben.github.io,http://localhost:3000"
 # The address of this service once deployed, used in the patient's cancel link.
 PUBLIC_URL = ""
 
