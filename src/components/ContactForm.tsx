@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check, TriangleAlert } from "lucide-react";
-import { formConfigured, mailtoFallback, submitForm } from "@/lib/submit";
+import { bookingConfigured, formConfigured, mailtoFallback, submitEnquiry, submitForm } from "@/lib/submit";
 import { u, type UiKey } from "@/data/ui";
 import { useLang } from "@/lib/lang-context";
 
@@ -11,8 +11,8 @@ const field =
 
 export default function ContactForm() {
   const lang = useLang();
-  const [v, setV] = useState({ name: "", mobile: "", message: "", website: "" });
-  const [errors, setErrors] = useState<Partial<Record<"name" | "mobile" | "message", UiKey>>>({});
+  const [v, setV] = useState({ name: "", mobile: "", email: "", message: "", website: "" });
+  const [errors, setErrors] = useState<Partial<Record<"name" | "mobile" | "email" | "message", UiKey>>>({});
   const [done, setDone] = useState(false);
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -24,19 +24,20 @@ export default function ContactForm() {
     const errs: typeof errors = {};
     if (v.name.trim().length < 2) errs.name = "eName";
     if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(v.mobile.replace(/\s|-/g, ""))) errs.mobile = "eMobile";
+    if (v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) errs.email = "eEmail";
     if (v.message.trim().length < 5) errs.message = "eMessage";
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
-    const fields = { name: v.name, mobile: v.mobile, message: v.message };
+    const fields = { name: v.name, mobile: v.mobile, email: v.email || "(not given)", message: v.message };
     const subject = `Website enquiry from ${v.name}`;
-    if (!formConfigured()) {
+    if (!bookingConfigured() && !formConfigured()) {
       setMailto(mailtoFallback(subject, `name: ${v.name}\nmobile: ${v.mobile}\n\n${v.message}`));
       return setDone(true);
     }
     setSending(true);
     setFailed(false);
-    const ok = await submitForm(subject, fields);
+    const ok = bookingConfigured() ? await submitEnquiry({ name: v.name, mobile: v.mobile, email: v.email, message: v.message, website: v.website }) : await submitForm(subject, fields);
     setSending(false);
     if (ok) setDone(true);
     else setFailed(true);
@@ -73,6 +74,11 @@ export default function ContactForm() {
       <h2 className="text-4xl text-blue-950">{u("enquiry", lang)}</h2>
       {row("name", "yourName")}
       {row("mobile", "fMobile", "tel")}
+      <div>
+        <label htmlFor="c-email" className="mb-2 block text-sm font-semibold text-blue-950">{u("fEmail", lang)}</label>
+        <input id="c-email" type="email" autoComplete="email" className={field} value={v.email} onChange={(e) => { setV({ ...v, email: e.target.value }); setErrors({ ...errors, email: undefined }); }} />
+        {errors.email && <p role="alert" className="mt-2 text-sm text-red-700">{u(errors.email, lang)}</p>}
+      </div>
       <div>
         <label htmlFor="c-message" className="mb-2 block text-sm font-semibold text-blue-950">{u("yourMessage", lang)} *</label>
         <textarea id="c-message" rows={4} className={field} value={v.message} onChange={(e) => { setV({ ...v, message: e.target.value }); setErrors({ ...errors, message: undefined }); }} />

@@ -5,8 +5,9 @@ import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, TriangleAlert } from "lucide-react";
 import { departments, deptBySlug, doctorBySlug, doctors } from "@/data/content";
-import { windowLabel, windows } from "@/data/windows";
-import { formConfigured, mailtoFallback, submitForm } from "@/lib/submit";
+import { timeLabel } from "@/data/slots";
+import SlotPicker from "./SlotPicker";
+import { bookingConfigured, formConfigured, mailtoFallback, submitBooking, submitForm } from "@/lib/submit";
 import { u, type UiKey } from "@/data/ui";
 import { tr } from "@/lib/i18n";
 import { useLang } from "@/lib/lang-context";
@@ -71,6 +72,7 @@ export default function AppointmentForm() {
   const [sending, setSending] = useState(false);
   const [formError, setFormError] = useState<UiKey | null>(null);
   const [mailto, setMailto] = useState<string | null>(null);
+  const [booked, setBooked] = useState(false);
 
   // Set on the DOM after mount: reading the current date during prerender is not allowed.
   const dateRef = useRef<HTMLInputElement>(null);
@@ -92,6 +94,8 @@ export default function AppointmentForm() {
   const steps: UiKey[] = ["stepDoctor", "stepWhen", "stepYou"];
   const doc = v.doctor ? doctorBySlug(v.doctor) : undefined;
   const deptDoctors = doctors.filter((d) => d.department === v.department);
+  // Each department has one doctor today, so "any available doctor" books that doctor.
+  const slotDoctor = v.doctor || deptDoctors[0]?.slug || "";
 
   function next() {
     const errs = validate(step, v);
@@ -114,7 +118,7 @@ export default function AppointmentForm() {
       department: deptBySlug(v.department)?.name.en ?? v.department,
       doctor: doctorBySlug(v.doctor)?.name.en ?? "Any available doctor",
       preferred_date: v.date,
-      preferred_time: windowLabel(v.time, "en"),
+      preferred_time: timeLabel(v.time, "en"),
       patient_name: v.name,
       mobile: v.mobile,
       email: v.email || "(not given)",
@@ -124,6 +128,20 @@ export default function AppointmentForm() {
       consent_given: "yes",
     };
     const subject = `New appointment request ${code}`;
+
+    if (bookingConfigured()) {
+      setSending(true);
+      setFormError(null);
+      const r = await submitBooking({
+        kind: "appt", lang, doctor: slotDoctor, name: v.name, mobile: v.mobile, email: v.email, age: v.age, gender: v.gender,
+        date: v.date, time: v.time, website: v.website,
+        details: { department: deptBySlug(v.department)?.name.en ?? v.department, reason: v.reason },
+      });
+      setSending(false);
+      if (r.ok) { setBooked(true); return setRef(r.ref); }
+      if (r.reason === "full") { set("time", ""); setStep(1); return setFormError("slotTaken"); }
+      return setFormError("eServer");
+    }
 
     if (!formConfigured()) {
       // No form service connected yet: offer the details as an email instead of pretending they were sent.
@@ -140,7 +158,6 @@ export default function AppointmentForm() {
   }
 
   if (ref) {
-    const win = windows.find((w) => w.v === v.time);
     return (
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -155,13 +172,13 @@ export default function AppointmentForm() {
         >
           <Check className="h-8 w-8" aria-hidden />
         </motion.span>
-        <h2 className="mt-6 text-4xl text-blue-950">{u("received", lang)}</h2>
-        <p className="mx-auto mt-3 max-w-md text-muted">{u("receivedText", lang).replace("{mobile}", v.mobile)}</p>
+        <h2 className="mt-6 text-4xl text-blue-950">{booked ? u("booked", lang) : u("received", lang)}</h2>
+        <p className="mx-auto mt-3 max-w-md text-muted">{booked ? u("bookedText", lang) : u("receivedText", lang).replace("{mobile}", v.mobile)}</p>
         <dl className="mx-auto mt-8 max-w-sm divide-y divide-line border-y border-line text-left text-sm">
           {[
             [u("fDepartment", lang), deptBySlug(v.department) ? tr(deptBySlug(v.department)!.name, lang) : ""],
             [u("fDoctor", lang), doc ? tr(doc.name, lang) : u("anyDoctor", lang)],
-            [u("fDate", lang), `${v.date} · ${win ? win[lang] : ""}`],
+            [u("fDate", lang), `${v.date} · ${timeLabel(v.time, lang)}`],
             [u("reference", lang), ref],
           ].map(([k, val]) => (
             <div key={k} className="flex justify-between gap-4 py-3">
@@ -181,7 +198,7 @@ export default function AppointmentForm() {
           </div>
         )}
         <button
-          onClick={() => { setV(empty); setStep(0); setRef(null); setMailto(null); }}
+          onClick={() => { setV(empty); setStep(0); setRef(null); setMailto(null); setBooked(false); }}
           className="btn btn-outline mt-8"
         >
           {u("another", lang)}
@@ -249,27 +266,13 @@ export default function AppointmentForm() {
             <>
               <div className="sm:col-span-2">
                 <label htmlFor="date" className={label}>{u("fDate", lang)} *</label>
-                <input id="date" type="date" ref={dateRef} className={field} value={v.date} onChange={(e) => set("date", e.target.value)} />
+                <input id="date" type="date" ref={dateRef} className={field} value={v.date} onChange={(e) => { set("date", e.target.value); set("time", ""); }} />
                 <p className="mt-2 text-xs text-muted">{u("opd", lang)}: {lang === "en" ? "Mon to Sat, 6 PM to 10 PM" : "सोम से शनि, शाम 6 से रात 10 बजे"}</p>
                 {err("date")}
               </div>
               <div className="sm:col-span-2">
-                <p id="time-label" className={label}>{u("fTime", lang)} *</p>
-                <div role="group" aria-labelledby="time-label" className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {windows.map((w) => (
-                    <button
-                      type="button"
-                      key={w.v}
-                      aria-pressed={v.time === w.v}
-                      onClick={() => set("time", w.v)}
-                      className={`rounded-2xl border px-3 py-3.5 text-sm font-semibold transition duration-300 ${
-                        v.time === w.v ? "border-transparent bg-linear-to-br from-blue-500 to-blue-800 text-white shadow-lg shadow-blue-700/30" : "border-line bg-white text-blue-950 hover:border-blue-500"
-                      }`}
-                    >
-                      {w[lang]}
-                    </button>
-                  ))}
-                </div>
+                <p id="time-label" className={label}>{u("fTimeExact", lang)} *</p>
+                <SlotPicker kind="appt" doctor={slotDoctor} date={v.date} value={v.time} onChange={(t) => set("time", t)} />
                 {err("time")}
               </div>
             </>
@@ -338,11 +341,11 @@ export default function AppointmentForm() {
           </button>
         ) : <span />}
         {step < 2 ? (
-          <button type="button" onClick={next} className="btn btn-blue">
+          <button key="continue" type="button" onClick={next} className="btn btn-blue">
             {u("next", lang)} <ArrowRight className="h-4 w-4" aria-hidden />
           </button>
         ) : (
-          <button type="submit" disabled={sending} className="btn btn-green disabled:opacity-60">
+          <button key="submit" type="submit" disabled={sending} className="btn btn-green disabled:opacity-60">
             {sending ? u("sending", lang) : u("submit", lang)}
           </button>
         )}

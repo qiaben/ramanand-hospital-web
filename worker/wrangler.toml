@@ -1,0 +1,53 @@
+name = "ramanand-booking"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+# Runs the reminder check every minute.
+[triggers]
+crons = ["* * * * *"]
+
+# The bookings database. Create it with `npx wrangler d1 create ramanand-bookings`, paste the id it prints
+# below, then run `npx wrangler d1 execute ramanand-bookings --remote --file=schema.sql`.
+[[d1_databases]]
+binding = "DB"
+database_name = "ramanand-bookings"
+database_id = "PASTE_THE_ID_HERE"
+
+[vars]
+# Websites allowed to call this service, comma separated.
+ALLOWED_ORIGINS = "https://www.ramanandhospital.com,http://localhost:3000"
+# The address of this service once deployed, used in the patient's cancel link.
+PUBLIC_URL = ""
+
+# Email, option 1 (no domain needed): the Google Apps Script web app URL from gmail-relay.gs. Leave empty to use Resend instead.
+MAIL_RELAY_URL = "https://script.google.com/macros/s/AKfycbyXK4-0Sb3paTnYa0PGtV5VHGowv9_3IDbw2w5k0QxOVa3N0LVV3K7TXY34CN_cxbT9Gg/exec"
+
+# Email, option 2: Resend. The address must be on a domain verified in Resend. The doctor's name is shown as the sender name.
+MAIL_FROM_ADDRESS = "ramanandhosp@gmail.com"
+MAIL_FROM = "Ramanand Hospital <ramanandhosp@gmail.com>"
+
+# Hospital inboxes that receive every booking, comma separated, and optional staff WhatsApp numbers (10 digits).
+HOSPITAL_EMAIL = "ramanandhosp@gmail.com"
+STAFF_WA_NUMBERS = ""
+# The website enquiry (contact) form is emailed only to this address.
+ENQUIRY_EMAIL = "ramanandhosp@gmail.com"
+
+# Doctors and the lab desk. The key is the doctor's page address on the website, or "lab".
+# "wa" is the doctor's own WhatsApp number (10 digits) for alerts. "email" is also used as the reply address.
+DOCTORS_JSON = '''{
+  "arun-kumar":    { "name": "Dr. Arun Kumar",    "nameHi": "डॉ. अरुण कुमार", "email": "", "wa": "" },
+  "shikha-siwach": { "name": "Dr. Shikha Siwach", "nameHi": "डॉ. शिखा सिवाच", "email": "", "wa": "" },
+  "lab":           { "name": "Laboratory",        "nameHi": "प्रयोगशाला",     "email": "", "wa": "" }
+}'''
+
+# Optional: change slot length or how many patients fit in a slot, for example {"appt":{"step":20},"lab":{"cap":4}}.
+SLOT_RULES = ""
+
+# Names of the approved WhatsApp templates (see README). The defaults are used when these are left out.
+# WA_T_BOOKED, WA_T_REMIND, WA_T_STAFF, WA_T_STAFF_REMIND
+
+# Secrets (set with `npx wrangler secret put NAME`, never written here):
+#   MAIL_RELAY_SECRET  the SECRET you set in the Google script (option 1)
+#   RESEND_API_KEY     from resend.com (option 2 only)
+#   WA_TOKEN         permanent access token of the WhatsApp Business app
+#   WA_PHONE_ID      Phone number ID of the hospital's WhatsApp Business number

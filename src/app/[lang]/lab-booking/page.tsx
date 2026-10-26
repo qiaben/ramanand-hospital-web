@@ -6,6 +6,8 @@ import { u } from "@/data/ui";
 import { hasLocale, tr } from "@/lib/i18n";
 import { PageHeader } from "@/components/Section";
 import LabBookingForm from "@/components/LabBookingForm";
+import QrCode from "@/components/QrCode";
+import { bookingConfigured } from "@/lib/submit";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/lab-booking">): Promise<Metadata> {
   const { lang } = await params;
@@ -17,7 +19,7 @@ export default async function Page({ params }: PageProps<"/[lang]/lab-booking">)
   if (!hasLocale(lang)) notFound();
   return (
     <>
-      <PageHeader eyebrow={u("labPharmacyHours", lang)} title={u("labBookTitle", lang)} sub={u("labBookSub", lang)} />
+      <PageHeader eyebrow={u("labPharmacyHours", lang)} title={u("labBookTitle", lang)} sub={u(bookingConfigured() ? "labBookSubBooked" : "labBookSub", lang)} />
       <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-24 pt-16 sm:pb-32 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
         <aside className="space-y-4 lg:sticky lg:top-32 lg:self-start">
           <div className="card flex items-center gap-4 rounded-3xl! p-5">
@@ -27,6 +29,13 @@ export default async function Page({ params }: PageProps<"/[lang]/lab-booking">)
             <span>
               <span className="block text-sm text-muted">{u("openingHours", lang)}</span>
               <span className="font-display block text-xl text-blue-950">{tr(site.labPharmacyText, lang)}</span>
+            </span>
+          </div>
+          <div className="card hidden items-center gap-4 rounded-3xl! p-5 lg:flex">
+            <QrCode url={`https://${site.domain}/${lang}/lab-booking/`} label={u("labScanTitle", lang)} className="w-24 shrink-0 [&>svg]:h-auto [&>svg]:w-full" />
+            <span>
+              <span className="font-display block text-lg text-blue-950">{u("labScanTitle", lang)}</span>
+              <span className="mt-0.5 block text-sm text-muted">{u("labScanSub", lang)}</span>
             </span>
           </div>
           <p className="text-sm text-muted">
