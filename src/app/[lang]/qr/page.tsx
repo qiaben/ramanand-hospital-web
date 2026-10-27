@@ -28,7 +28,7 @@ export default async function Page({ params }: PageProps<"/[lang]/qr">) {
         <PrintButton label={u("qrPrint", lang)} />
       </div>
 
-      <ul className="mt-10 grid gap-8 sm:grid-cols-2 print:mt-0 print:gap-6">
+      <ul className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 print:mt-0 print:gap-6">
         {cards.map((c) => {
           const Icon = c.icon;
           return (

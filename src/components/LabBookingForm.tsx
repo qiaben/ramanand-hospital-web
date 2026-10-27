@@ -288,7 +288,7 @@ export default function LabBookingForm() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -18 }}
           transition={{ duration: 0.3 }}
-          className="mt-9 grid gap-6 sm:grid-cols-2"
+          className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2"
         >
           {step === 0 && (
             <>
@@ -393,7 +393,7 @@ export default function LabBookingForm() {
             <>
               <div className="sm:col-span-2">
                 <p id="where-label" className={label}>{u("labWhere", lang)}</p>
-                <div role="group" aria-labelledby="where-label" className="grid gap-3 sm:grid-cols-2">
+                <div role="group" aria-labelledby="where-label" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {([
                     { v: "hospital", t: u("labHospital", lang), d: u("labHospitalSub", lang), Icon: Building2 },
                     { v: "home", t: u("labHome", lang), d: u("labHomeSub", lang), Icon: Home },

@@ -11,7 +11,7 @@ export default function MessageBand({ lang }: { lang: Lang }) {
   const m = about.message;
   return (
     <section className="bg-blue-50 py-20 sm:py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[auto_1fr] lg:gap-16">
+      <div className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-10 px-5 lg:grid-cols-[auto_1fr] lg:gap-16">
         <Reveal className="mx-auto text-center">
           <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-white text-5xl font-extrabold text-blue-700 shadow-lg ring-4 ring-white">
             {tr({ en: "AK", hi: "अ" }, lang)}

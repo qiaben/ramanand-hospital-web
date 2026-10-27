@@ -15,7 +15,7 @@ export default function VisitBlock({ lang }: { lang: Lang }) {
     { icon: Clock, label: u("timings", lang), value: tr(site.opdText, lang), tone: "bg-green-50 text-green-700" },
   ];
   return (
-    <section className="mx-auto grid max-w-7xl items-stretch gap-10 px-5 py-20 sm:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+    <section className="mx-auto grid grid-cols-1 max-w-7xl items-stretch gap-10 px-5 py-20 sm:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
       <div>
         <SectionHead eyebrow={u("visitEyebrow", lang)} title={u("visitTitle", lang)} />
         <ul className="mt-8 space-y-3">

@@ -24,7 +24,7 @@ export default async function Page({ params }: PageProps<"/[lang]/patient-info">
 
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:pb-28">
         {/* PENDING: every topic below is still "[TO BE PROVIDED]" in the client form. */}
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {patientTopics.map((t, i) => {
             const Icon = icons[t.key as keyof typeof icons];
             return (

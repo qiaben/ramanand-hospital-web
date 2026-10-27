@@ -20,7 +20,7 @@ export default async function Page({ params }: PageProps<"/[lang]/lab-booking">)
   return (
     <>
       <PageHeader eyebrow={u("labPharmacyHours", lang)} title={u("labBookTitle", lang)} sub={u(bookingConfigured() ? "labBookSubBooked" : "labBookSub", lang)} />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-24 pt-16 sm:pb-32 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl gap-12 px-5 pb-24 pt-16 sm:pb-32 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
         <aside className="space-y-4 lg:sticky lg:top-32 lg:self-start">
           <div className="card flex items-center gap-4 rounded-3xl! p-5">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-50 text-green-700">

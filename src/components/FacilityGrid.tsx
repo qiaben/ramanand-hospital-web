@@ -14,7 +14,7 @@ const style = {
 
 export default function FacilityGrid({ lang }: { lang: Lang }) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
       {facilities.map((f, i) => {
         const s = style[f.key as keyof typeof style];
         const Icon = s.icon;

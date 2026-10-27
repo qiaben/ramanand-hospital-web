@@ -22,7 +22,7 @@ export default async function Page({ params }: PageProps<"/[lang]/appointment">)
   return (
     <>
       <PageHeader eyebrow={u("requestAppt", lang)} title={u("apptTitle", lang)} sub={u(bookingConfigured() ? "apptSubBooked" : "apptSub", lang)} />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-24 pt-16 sm:pb-32 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl gap-12 px-5 pb-24 pt-16 sm:pb-32 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
         <aside className="lg:sticky lg:top-32 lg:self-start">
           <ol className="space-y-4">
             {steps.slice(1).map((s, i) => (

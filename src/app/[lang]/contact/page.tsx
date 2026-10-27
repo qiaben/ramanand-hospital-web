@@ -37,14 +37,14 @@ export default async function Page({ params }: PageProps<"/[lang]/contact">) {
     <>
       <PageHeader eyebrow={u("contactTitle", lang)} title={u("contactTitle", lang)} sub={u("contactSub", lang)} />
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-16 sm:pb-28 lg:grid-cols-2 lg:gap-16">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl gap-12 px-5 pb-20 pt-16 sm:pb-28 lg:grid-cols-2 lg:gap-16">
         <div className="space-y-4">
           <Reveal>
             <div className="card p-5 sm:p-6">
               <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-muted">
                 <Phone className="h-4 w-4 text-green-700" aria-hidden /> {u("phoneNumbers", lang)}
               </p>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {numbers.map((n) => (
                   <li key={n.k}>
                     <a href={`tel:${site.tel}`} className="group flex items-center justify-between gap-3 rounded-xl bg-mist px-4 py-3.5 transition hover:bg-blue-100">

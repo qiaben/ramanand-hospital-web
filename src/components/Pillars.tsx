@@ -21,7 +21,7 @@ export default function Pillars() {
     <section className="bg-mist py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead center eyebrow={u("pillarsEyebrow", lang)} title={u("pillarsTitle", lang)} />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {pillars.map((p, i) => {
             const s = style[p.key as keyof typeof style];
             const Icon = s.icon;

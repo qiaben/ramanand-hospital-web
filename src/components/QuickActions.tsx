@@ -19,7 +19,7 @@ export default function QuickActions() {
   ];
   return (
     <section className="relative z-10 mx-auto -mt-14 max-w-7xl px-5">
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 sm:max-lg:[&>li:last-child:nth-child(odd)]:col-span-2">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 sm:max-lg:[&>li:last-child:nth-child(odd)]:col-span-2">
         {items.map((it, i) => {
           const Icon = it.icon;
           const inner = (

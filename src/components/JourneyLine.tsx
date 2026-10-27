@@ -40,7 +40,7 @@ export default function JourneyLine() {
   const w = useTransform(p, [0, 1], ["0%", "100%"]);
 
   return (
-    <ol ref={ref} className="relative grid gap-10 md:grid-cols-4 md:gap-6">
+    <ol ref={ref} className="relative grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-6">
       {/* horizontal line (desktop) */}
       <span aria-hidden className="absolute left-[12.5%] right-[12.5%] top-7 hidden h-0.5 rounded-full bg-blue-100 md:block" />
       <span aria-hidden className="absolute left-[12.5%] right-[12.5%] top-7 hidden h-0.5 md:block">
