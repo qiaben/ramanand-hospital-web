@@ -157,6 +157,7 @@ function patientEmail(b, d, hi, cancel) {
     : [
         [L("Doctor", "डॉक्टर"), (hi ? d.nameHi : d.name) || d.name || L("Our doctor", "हमारे डॉक्टर")],
         ...(x.department ? [[L("Department", "विभाग"), x.department]] : []),
+        ...(x.reason ? [[L("Symptoms", "तकलीफ़"), x.reason]] : []),
         [L("Date", "तारीख"), date],
         [L("Time", "समय"), time],
         [L("Reference", "संदर्भ संख्या"), b.ref],
@@ -204,7 +205,7 @@ async function notifyBooked(env, b, base) {
       ["Reference", b.ref], ["For", whatText(b, d, false)], ["Date", dateLabel(b.date, false)], ["Time", timeLabel(b.time, false)],
       ["Patient", b.name], ["Mobile", b.mobile], ["Email", b.email || "(not given)"], ["Age / gender", `${b.age} / ${b.gender}`],
       ...(x.department ? [["Department", x.department]] : []),
-      ...(x.reason ? [["Reason", x.reason]] : []),
+      ...(x.reason ? [["Symptoms", x.reason]] : []),
       ...(x.tests ? [["Tests", x.tests]] : []),
       ...(x.testNotes ? [["Test notes", x.testNotes]] : []),
       ...(x.collection === "home" ? [["Sample", "HOME COLLECTION"], ["Address", x.address], ["PIN", x.pincode], ["Map", x.mapLink || "(not shared)"]] : x.collection ? [["Sample", "Patient visits the lab"]] : []),

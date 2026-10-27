@@ -312,7 +312,7 @@ export default function AppointmentForm() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="reason" className={label}>{u("fReason", lang)}</label>
-                <textarea id="reason" rows={3} maxLength={250} className={field} value={v.reason} onChange={(e) => set("reason", e.target.value)} />
+                <textarea id="reason" rows={3} maxLength={250} placeholder={u("fReasonHint", lang)} className={field} value={v.reason} onChange={(e) => set("reason", e.target.value)} />
                 <p className="mt-1 text-right text-xs text-muted">{v.reason.length}/250</p>
               </div>
 
