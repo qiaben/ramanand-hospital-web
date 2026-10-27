@@ -137,6 +137,7 @@ export const ui = {
   fTime: { en: "Preferred time", hi: "पसंदीदा समय" },
   fName: { en: "Patient's full name", hi: "रोगी का पूरा नाम" },
   fMobile: { en: "Mobile number", hi: "मोबाइल नंबर" },
+  fEmailReq: { en: "Email", hi: "ईमेल" },
   fEmail: { en: "Email (optional)", hi: "ईमेल (वैकल्पिक)" },
   fAge: { en: "Age", hi: "आयु" },
   fGender: { en: "Gender", hi: "लिंग" },
@@ -240,7 +241,7 @@ export const ui = {
   qaLabSub: { en: "Visit or home collection", hi: "लैब आएँ या घर से नमूना" },
   bookLabShort: { en: "Book Lab Test", hi: "लैब जाँच बुक करें" },
   labPharmacyShort: { en: "Lab & Pharmacy", hi: "लैब और फार्मेसी" },
-  labConfirmNote: { en: "We will send a confirmation to your mobile number on WhatsApp, and to your email if you enter one.", hi: "हम आपके मोबाइल नंबर पर WhatsApp से और ईमेल देने पर ईमेल से पुष्टि भेजेंगे।" },
+  labConfirmNote: { en: "We will send your booking confirmation to this email.", hi: "हम आपकी बुकिंग की पुष्टि इसी ईमेल पर भेजेंगे।" },
   labConsent: {
     en: "I agree that Ramanand Hospital may contact me about this request, including by WhatsApp and email, and store the details I have provided for this booking.",
     hi: "मैं सहमत हूँ कि रामानंद हॉस्पिटल इस अनुरोध के संबंध में WhatsApp और ईमेल सहित मुझसे संपर्क कर सकता है और इस बुकिंग के लिए मेरी दी गई जानकारी सुरक्षित रख सकता है।",
