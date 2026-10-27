@@ -262,7 +262,7 @@ function clean(body, rules) {
       mapLink: String(x.mapLink ?? "").startsWith("https://www.google.com/maps?q=") ? clip(x.mapLink, 120) : "",
     },
   };
-  if (v.name.length < 2 || !/^[6-9]\d{9}$/.test(v.mobile)) return null;
+  if (v.name.length < 2 || !/^[6-9]\d{9}$/.test(v.mobile) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) return null;
   if (kind === "appt" && !/^[a-z0-9-]{1,40}$/.test(doctor)) return null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || !/^\d{2}:\d{2}$/.test(v.time)) return null;
   const r = rules[kind];

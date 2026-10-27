@@ -44,7 +44,7 @@ function validate(step: number, v: Values): Errors {
   if (step === 2) {
     if (v.name.trim().length < 2) e.name = "eName";
     if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(v.mobile.replace(/\s|-/g, ""))) e.mobile = "eMobile";
-    if (v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = "eEmail";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = "eEmail";
     const age = Number(v.age);
     if (!v.age || !Number.isFinite(age) || age < 0 || age > 120) e.age = "eAge";
     if (!v.gender) e.gender = "eGender";
@@ -291,7 +291,7 @@ export default function AppointmentForm() {
                 {err("mobile")}
               </div>
               <div>
-                <label htmlFor="email" className={label}>{u("fEmail", lang)}</label>
+                <label htmlFor="email" className={label}>{u("fEmailReq", lang)} *</label>
                 <input id="email" type="email" className={field} value={v.email} autoComplete="email" onChange={(e) => set("email", e.target.value)} />
                 {err("email")}
               </div>

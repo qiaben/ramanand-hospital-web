@@ -48,7 +48,7 @@ function validate(step: number, v: Values): Errors {
   if (step === 2) {
     if (v.name.trim().length < 2) e.name = "eName";
     if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(v.mobile.replace(/\s|-/g, ""))) e.mobile = "eMobile";
-    if (v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = "eEmail";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = "eEmail";
     const age = Number(v.age);
     if (!v.age || !Number.isFinite(age) || age < 0 || age > 120) e.age = "eAge";
     if (!v.gender) e.gender = "eGender";
@@ -322,7 +322,8 @@ export default function LabBookingForm() {
                   ))}
                 </div>
 
-                <div role="group" aria-labelledby="tests-label" className="mt-3 max-h-80 overflow-y-auto rounded-2xl border border-line bg-white p-2">
+                <p className="mt-3 text-xs font-semibold text-muted">{u("labTotal", lang).replace("{n}", String([...labTestGroups, ...fullGroups].reduce((n, g) => n + g.tests.length, 0)))}</p>
+                <div role="group" aria-labelledby="tests-label" className="mt-2 max-h-96 overflow-y-auto rounded-2xl border border-line bg-white p-2">
                   {visible.length === 0 && <p className="px-3 py-6 text-center text-sm text-muted">{u("labNoMatch", lang)}</p>}
                   {visible.map((g) => (
                     <div key={g.key} className="mb-1">
@@ -344,7 +345,12 @@ export default function LabBookingForm() {
                       </ul>
                       {g.tests.length < g.total && (
                         <button type="button" onClick={() => setShown((s) => ({ ...s, [g.key]: (s[g.key] ?? 1) + 1 }))} className="mx-3 my-2 text-sm font-bold text-blue-700 underline">
-                          {u("labShowMore", lang).replace("{n}", String(g.total - g.tests.length))}
+                          {u("labShowMore", lang).replace("{n}", String(Math.min(PAGE, g.total - g.tests.length)))}
+                        </button>
+                      )}
+                      {g.tests.length < g.total && (
+                        <button type="button" onClick={() => setShown((s) => ({ ...s, [g.key]: Math.ceil(g.total / PAGE) }))} className="mx-3 my-2 text-sm font-bold text-blue-700 underline">
+                          {u("labShowAll", lang)} ({g.total})
                         </button>
                       )}
                     </div>
@@ -429,7 +435,7 @@ export default function LabBookingForm() {
                 {err("mobile")}
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="email" className={label}>{u("fEmail", lang)}</label>
+                <label htmlFor="email" className={label}>{u("fEmailReq", lang)} *</label>
                 <input id="email" type="email" className={field} value={v.email} autoComplete="email" onChange={(e) => set("email", e.target.value)} />
                 <p className="mt-1.5 text-xs text-muted">{u("labConfirmNote", lang)}</p>
                 {err("email")}
