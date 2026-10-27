@@ -38,7 +38,7 @@ export default function AboutIntro() {
     { n: 6, l: { en: "OPD days a week", hi: "सप्ताह में ओपीडी के दिन" } },
   ];
   return (
-    <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:py-24 lg:grid-cols-2 lg:gap-16">
+    <section className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-12 px-5 py-20 sm:py-24 lg:grid-cols-2 lg:gap-16">
       <div>
         <SectionHead eyebrow={u("aboutEyebrow", lang)} title={`${u("aboutEyebrow", lang)}: ${tr(site.name, lang)}`} />
         <div className="mt-5 space-y-4">

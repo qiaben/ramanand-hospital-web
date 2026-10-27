@@ -37,7 +37,7 @@ export default async function Page({ params }: PageProps<"/[lang]/facilities/[sl
       <PageHeader eyebrow={u("facEyebrow", lang)} title={tr(f.title, lang)} sub={tr(f.text, lang)} />
 
       {/* Introduction with the key facts */}
-      <section className="mx-auto grid max-w-7xl items-start gap-12 px-5 py-16 sm:py-24 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl items-start gap-12 px-5 py-16 sm:py-24 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
         <div>
           <Reveal>
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-blue-400 to-blue-700 text-white shadow-lg">
@@ -92,7 +92,7 @@ export default async function Page({ params }: PageProps<"/[lang]/facilities/[sl
       <section className="bg-mint pattern-cross-blue">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:py-28">
           <SectionHead eyebrow={tr(f.title, lang)} title={tr(detail.offersTitle, lang)} />
-          <ul className="mt-12 grid gap-5 md:grid-cols-2">
+          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
             {detail.offers.map((o, i) => (
               <Reveal as="li" key={o.h.en} delay={(i % 2) * 0.08}>
                 <div className="card card-hover flex h-full gap-5 rounded-3xl! p-6 sm:p-7">
@@ -142,7 +142,7 @@ export default async function Page({ params }: PageProps<"/[lang]/facilities/[sl
       <section className="border-t border-line bg-mist">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:py-20">
           <h2 className="text-3xl text-blue-950">{u("otherFacilities", lang)}</h2>
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {others.map((o) => {
               const OIcon = icons[o.key as keyof typeof icons];
               return (

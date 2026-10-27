@@ -14,7 +14,7 @@ const tones = [
 
 export default function DeptCards({ lang }: { lang: Lang }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       {departments.map((d, i) => {
         const Icon = icons[d.icon];
         const head = doctorBySlug(d.head);

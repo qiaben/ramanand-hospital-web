@@ -48,7 +48,7 @@ export default async function Page({ params }: PageProps<"/[lang]/doctors/[slug]
       <PageHeader eyebrow={dept ? tr(dept.name, lang) : ""} title={tr(d.name, lang)} sub={tr(d.designation, lang)} />
 
       {/* Introduction: portrait, a warm write-up, and the key facts */}
-      <section className="mx-auto grid max-w-7xl gap-14 px-5 py-16 sm:py-24 lg:grid-cols-[auto_1fr] lg:gap-20">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl gap-14 px-5 py-16 sm:py-24 lg:grid-cols-[auto_1fr] lg:gap-20">
         <Reveal className="mx-auto lg:sticky lg:top-32 lg:self-start">
           <Portrait initials={tr(d.initials, lang)} size="lg" tone={tone} />
           <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -72,7 +72,7 @@ export default async function Page({ params }: PageProps<"/[lang]/doctors/[slug]
             ))}
           </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {facts.map((f, i) => (
               <Reveal key={f.k} delay={i * 0.06}>
                 <div className="card flex h-full items-center gap-4 rounded-3xl! p-5">
@@ -104,7 +104,7 @@ export default async function Page({ params }: PageProps<"/[lang]/doctors/[slug]
         <section className="bg-mint pattern-cross-blue">
           <div className="mx-auto max-w-7xl px-5 py-20 sm:py-28">
             <SectionHead eyebrow={tr(dept.name, lang).split(" (")[0]} title={u("treatsTitle", lang)} />
-            <ul className="mt-12 grid gap-4 md:grid-cols-2">
+            <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
               {trl(dept.treatments, lang).map((t, i) => (
                 <Reveal as="li" key={t} delay={(i % 2) * 0.08}>
                   <div className="card flex h-full gap-4 rounded-3xl! p-5">
@@ -123,7 +123,7 @@ export default async function Page({ params }: PageProps<"/[lang]/doctors/[slug]
       {/* Reassurance, built only from verifiable facts */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:py-28">
         <SectionHead center eyebrow={u("confidenceTitle", lang)} title={u("confidenceTitle", lang)} />
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {confidence.map((c, i) => (
             <Reveal as="li" key={c.h} delay={i * 0.08}>
               <div className="card card-hover h-full p-7">

@@ -21,7 +21,7 @@ export default function LabBand({ lang }: { lang: Lang }) {
         <div className="bg-hero relative overflow-hidden rounded-[2rem] p-7 text-white sm:p-12">
           <div aria-hidden className="pattern-cross absolute inset-0" />
           <FlaskConical aria-hidden strokeWidth={1} className="absolute -right-6 -top-6 h-56 w-56 text-white/10 sm:h-72 sm:w-72" />
-          <div className="relative grid items-center gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+          <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
             <div>
               <Eyebrow tone="dark">{tr(site.name, lang)}</Eyebrow>
               <h2 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">{u("labBandTitle", lang)}</h2>

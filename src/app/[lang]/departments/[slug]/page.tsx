@@ -63,7 +63,7 @@ export default async function Page({ params }: PageProps<"/[lang]/departments/[s
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:pb-28 sm:pt-20">
         <Reveal><p className="max-w-3xl text-[clamp(1.2rem,2vw,1.55rem)] font-medium leading-relaxed text-blue-950/90">{tr(d.description, lang)}</p></Reveal>
 
-        <div className="mt-14 grid gap-7 lg:grid-cols-2">
+        <div className="mt-14 grid grid-cols-1 gap-7 lg:grid-cols-2">
           <Reveal><Panel title={u("treatments", lang)} icon={Crown} tone="blue"><Ticks items={trl(d.treatments, lang)} tone="blue" /></Panel></Reveal>
           <div className="grid gap-7">
             <Reveal delay={0.1}><Panel title={u("equipment", lang)} icon={Wrench} tone="green"><Ticks items={trl(d.equipment, lang)} tone="green" /></Panel></Reveal>

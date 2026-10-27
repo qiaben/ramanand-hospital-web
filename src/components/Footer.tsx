@@ -10,7 +10,7 @@ export default function Footer({ lang }: { lang: Lang }) {
   return (
     <footer className="mt-auto bg-ink text-white/75">
       <div className="mx-auto max-w-7xl px-5 pb-24 pt-14 sm:pb-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
               <Logo size="sm" className="h-16 w-16" />

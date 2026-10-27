@@ -28,7 +28,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
     <>
       <PageHeader eyebrow={u("aboutEyebrow", lang)} title={u("aboutTitle", lang)} />
 
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-12 px-5 py-16 sm:py-20 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
         <Reveal>
           <div className="card mx-auto flex aspect-square w-full max-w-xs items-center justify-center rounded-3xl bg-linear-to-b from-blue-50 to-white p-8">
             <Logo size="lg" className="animate-drift h-full w-full drop-shadow-[0_14px_18px_rgb(11_31_71/0.2)]" />
@@ -44,7 +44,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-20 md:grid-cols-2">
+      <section className="mx-auto grid grid-cols-1 max-w-7xl gap-6 px-5 pb-20 md:grid-cols-2">
         {vm.map((b, i) => (
           <Reveal key={b.k} delay={i * 0.1} className={`card border-t-4 p-8 ${b.top}`}>
             <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${b.tile}`}><b.icon className="h-6 w-6" aria-hidden /></span>
@@ -74,7 +74,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
         <SectionHead center eyebrow={u("team", lang)} title={u("team", lang)} />
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {about.team.map((t, i) => (
             <Reveal as="li" key={t.name.en} delay={i * 0.07}>
               <div className="card card-hover h-full p-6 text-center">

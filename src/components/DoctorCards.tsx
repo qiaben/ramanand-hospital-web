@@ -33,7 +33,7 @@ export function Portrait({
 
 export default function DoctorCards({ lang }: { lang: Lang }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       {doctors.map((d, i) => {
         const dept = deptBySlug(d.department);
         const tone = i % 2 === 0 ? "blue" : "green";
