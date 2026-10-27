@@ -1,20 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, TriangleAlert } from "lucide-react";
-import { departments, deptBySlug, doctorBySlug, doctors } from "@/data/content";
 import { timeLabel } from "@/data/slots";
 import SlotPicker from "./SlotPicker";
 import { bookingConfigured, formConfigured, mailtoFallback, submitBooking, submitForm } from "@/lib/submit";
 import { u, type UiKey } from "@/data/ui";
-import { tr } from "@/lib/i18n";
 import { useLang } from "@/lib/lang-context";
 
 type Values = {
-  department: string;
-  doctor: string;
   date: string;
   time: string;
   name: string;
@@ -29,19 +24,21 @@ type Values = {
 type Errors = Partial<Record<keyof Values, UiKey>>;
 
 const empty: Values = {
-  department: "", doctor: "", date: "", time: "", name: "", mobile: "",
+  date: "", time: "", name: "", mobile: "",
   email: "", age: "", gender: "", reason: "", consent: false, website: "",
 };
 
+// Every appointment shares one slot calendar, so patients do not choose a department or doctor.
+const SLOT_KEY = "opd";
+
 function validate(step: number, v: Values): Errors {
   const e: Errors = {};
-  if (step === 0 && !v.department) e.department = "eDept";
-  if (step === 1) {
+  if (step === 0) {
     if (!v.date) e.date = "eDate";
     else if (new Date(`${v.date}T00:00:00`).getDay() === 0) e.date = "eSunday";
     if (!v.time) e.time = "eTime";
   }
-  if (step === 2) {
+  if (step === 1) {
     if (v.name.trim().length < 2) e.name = "eName";
     if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(v.mobile.replace(/\s|-/g, ""))) e.mobile = "eMobile";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = "eEmail";
@@ -59,13 +56,7 @@ const label = "mb-2 block text-sm font-medium text-blue-950";
 
 export default function AppointmentForm() {
   const lang = useLang();
-  const params = useSearchParams();
-  const [v, setV] = useState<Values>(() => {
-    const doc = doctorBySlug(params.get("doctor") ?? "");
-    if (doc) return { ...empty, doctor: doc.slug, department: doc.department };
-    const dept = deptBySlug(params.get("dept") ?? "");
-    return dept ? { ...empty, department: dept.slug } : empty;
-  });
+  const [v, setV] = useState<Values>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [step, setStep] = useState(0);
   const [ref, setRef] = useState<string | null>(null);
@@ -91,11 +82,7 @@ export default function AppointmentForm() {
       </p>
     ) : null;
 
-  const steps: UiKey[] = ["stepDoctor", "stepWhen", "stepYou"];
-  const doc = v.doctor ? doctorBySlug(v.doctor) : undefined;
-  const deptDoctors = doctors.filter((d) => d.department === v.department);
-  // Each department has one doctor today, so "any available doctor" books that doctor.
-  const slotDoctor = v.doctor || deptDoctors[0]?.slug || "";
+  const steps: UiKey[] = ["stepWhen", "stepYou"];
 
   function next() {
     const errs = validate(step, v);
@@ -106,7 +93,7 @@ export default function AppointmentForm() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (v.website || sending) return; // bot or double click
-    const errs = validate(2, v);
+    const errs = validate(1, v);
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
@@ -115,8 +102,6 @@ export default function AppointmentForm() {
     const fields = {
       reference: code,
       patient_language: lang === "hi" ? "Hindi" : "English",
-      department: deptBySlug(v.department)?.name.en ?? v.department,
-      doctor: doctorBySlug(v.doctor)?.name.en ?? "Any available doctor",
       preferred_date: v.date,
       preferred_time: timeLabel(v.time, "en"),
       patient_name: v.name,
@@ -133,13 +118,13 @@ export default function AppointmentForm() {
       setSending(true);
       setFormError(null);
       const r = await submitBooking({
-        kind: "appt", lang, doctor: slotDoctor, name: v.name, mobile: v.mobile, email: v.email, age: v.age, gender: v.gender,
+        kind: "appt", lang, doctor: SLOT_KEY, name: v.name, mobile: v.mobile, email: v.email, age: v.age, gender: v.gender,
         date: v.date, time: v.time, website: v.website,
-        details: { department: deptBySlug(v.department)?.name.en ?? v.department, reason: v.reason },
+        details: { reason: v.reason },
       });
       setSending(false);
       if (r.ok) { setBooked(true); return setRef(r.ref); }
-      if (r.reason === "full") { set("time", ""); setStep(1); return setFormError("slotTaken"); }
+      if (r.reason === "full") { set("time", ""); setStep(0); return setFormError("slotTaken"); }
       return setFormError("eServer");
     }
 
@@ -176,8 +161,6 @@ export default function AppointmentForm() {
         <p className="mx-auto mt-3 max-w-md text-muted">{booked ? u("bookedText", lang) : u("receivedText", lang).replace("{mobile}", v.mobile)}</p>
         <dl className="mx-auto mt-8 max-w-sm divide-y divide-line border-y border-line text-left text-sm">
           {[
-            [u("fDepartment", lang), deptBySlug(v.department) ? tr(deptBySlug(v.department)!.name, lang) : ""],
-            [u("fDoctor", lang), doc ? tr(doc.name, lang) : u("anyDoctor", lang)],
             [u("fDate", lang), `${v.date} · ${timeLabel(v.time, lang)}`],
             [u("reference", lang), ref],
           ].map(([k, val]) => (
@@ -244,27 +227,6 @@ export default function AppointmentForm() {
           {step === 0 && (
             <>
               <div className="sm:col-span-2">
-                <label htmlFor="department" className={label}>{u("fDepartment", lang)} *</label>
-                <select id="department" className={field} value={v.department}
-                  onChange={(e) => { setV((p) => ({ ...p, department: e.target.value, doctor: "" })); setErrors((p) => ({ ...p, department: undefined })); }}>
-                  <option value="">{u("selectDept", lang)}</option>
-                  {departments.map((d) => <option key={d.slug} value={d.slug}>{tr(d.name, lang)}</option>)}
-                </select>
-                {err("department")}
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="doctor" className={label}>{u("fDoctor", lang)}</label>
-                <select id="doctor" className={field} value={v.doctor} disabled={!v.department} onChange={(e) => set("doctor", e.target.value)}>
-                  <option value="">{u("anyDoctor", lang)}</option>
-                  {deptDoctors.map((d) => <option key={d.slug} value={d.slug}>{tr(d.name, lang)}</option>)}
-                </select>
-              </div>
-            </>
-          )}
-
-          {step === 1 && (
-            <>
-              <div className="sm:col-span-2">
                 <label htmlFor="date" className={label}>{u("fDate", lang)} *</label>
                 <input id="date" type="date" ref={dateRef} className={field} value={v.date} onChange={(e) => { set("date", e.target.value); set("time", ""); }} />
                 <p className="mt-2 text-xs text-muted">{u("opd", lang)}: {lang === "en" ? "Mon to Sat, 6 PM to 10 PM" : "सोम से शनि, शाम 6 से रात 10 बजे"}</p>
@@ -272,13 +234,13 @@ export default function AppointmentForm() {
               </div>
               <div className="sm:col-span-2">
                 <p id="time-label" className={label}>{u("fTimeExact", lang)} *</p>
-                <SlotPicker kind="appt" doctor={slotDoctor} date={v.date} value={v.time} onChange={(t) => set("time", t)} />
+                <SlotPicker kind="appt" doctor={SLOT_KEY} date={v.date} value={v.time} onChange={(t) => set("time", t)} />
                 {err("time")}
               </div>
             </>
           )}
 
-          {step === 2 && (
+          {step === 1 && (
             <>
               <div className="sm:col-span-2">
                 <label htmlFor="name" className={label}>{u("fName", lang)} *</label>
@@ -340,7 +302,7 @@ export default function AppointmentForm() {
             <ArrowLeft className="h-4 w-4" aria-hidden /> {u("back", lang)}
           </button>
         ) : <span />}
-        {step < 2 ? (
+        {step < steps.length - 1 ? (
           <button key="continue" type="button" onClick={next} className="btn btn-blue">
             {u("next", lang)} <ArrowRight className="h-4 w-4" aria-hidden />
           </button>

@@ -91,7 +91,8 @@ function whatText(b, d, hi) {
     const home = b.details.collection === "home";
     return hi ? (home ? "घर से नमूना संग्रह" : "प्रयोगशाला विज़िट") : home ? "home sample collection" : "lab visit";
   }
-  return hi ? `${d.nameHi || d.name || "डॉक्टर"} के साथ अपॉइंटमेंट` : `appointment with ${d.name || "our doctor"}`;
+  if (!d.name) return hi ? "परामर्श अपॉइंटमेंट" : "consultation appointment";
+  return hi ? `${d.nameHi || d.name} के साथ अपॉइंटमेंट` : `appointment with ${d.name}`;
 }
 
 /* ---------- sending ---------- */
@@ -155,7 +156,7 @@ function patientEmail(b, d, hi, cancel) {
         [L("Reference", "संदर्भ संख्या"), b.ref],
       ]
     : [
-        [L("Doctor", "डॉक्टर"), (hi ? d.nameHi : d.name) || d.name || L("Our doctor", "हमारे डॉक्टर")],
+        d.name ? [L("Doctor", "डॉक्टर"), (hi ? d.nameHi : d.name) || d.name] : [L("Appointment", "अपॉइंटमेंट"), L("Consultation at Ramanand Hospital", "रामानंद हॉस्पिटल में परामर्श")],
         ...(x.department ? [[L("Department", "विभाग"), x.department]] : []),
         ...(x.reason ? [[L("Symptoms", "तकलीफ़"), x.reason]] : []),
         [L("Date", "तारीख"), date],
