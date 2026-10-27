@@ -249,6 +249,8 @@ export const ui = {
   labSearch: { en: "Search tests, for example sugar, thyroid, CBC", hi: "जाँच खोजें, जैसे शुगर, थायरॉइड, CBC" },
   labCategories: { en: "Test categories", hi: "जाँच की श्रेणियाँ" },
   labNoMatch: { en: "No test matches your search. Choose the last option or type it in the box below.", hi: "आपकी खोज से कोई जाँच नहीं मिली। आख़िरी विकल्प चुनें या नीचे बॉक्स में लिखें।" },
+  labShowAll: { en: "Show all", hi: "सभी दिखाएँ" },
+  labTotal: { en: "{n} tests available. Search, or open a group and tap Show all.", hi: "{n} जाँचें उपलब्ध हैं। खोजें, या किसी समूह में सभी दिखाएँ दबाएँ।" },
   labShowMore: { en: "Show {n} more", hi: "{n} और दिखाएँ" },
   labSelected: { en: "Selected tests ({n})", hi: "चुनी गई जाँचें ({n})" },
   labRemove: { en: "Remove", hi: "हटाएँ" },
