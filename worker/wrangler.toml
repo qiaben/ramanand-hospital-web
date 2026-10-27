@@ -28,7 +28,7 @@ MAIL_FROM = "Ramanand Hospital <ramanandhosp@gmail.com>"
 
 # Hospital inboxes that receive every booking, comma separated, and optional staff WhatsApp numbers (10 digits).
 HOSPITAL_EMAIL = "ramanandhosp@gmail.com"
-STAFF_WA_NUMBERS = ""
+STAFF_WA_NUMBERS = "8010007488"
 # The website enquiry (contact) form is emailed only to this address.
 ENQUIRY_EMAIL = "ramanandhosp@gmail.com"
 
