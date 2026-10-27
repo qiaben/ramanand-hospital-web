@@ -29,6 +29,8 @@ jobs:
           # GitHub Pages preview lives at /<repo-name>. For the real domain, set the repository variable
           # SITE_BASE_PATH to "root" (Settings > Secrets and variables > Actions > Variables).
           NEXT_PUBLIC_BASE_PATH: ${{ vars.SITE_BASE_PATH || '/ramanand-hospital-web' }}
+          # Address of the booking service (see worker/README.md). Set it as a repository variable named BOOKING_API.
+          NEXT_PUBLIC_BOOKING_API: ${{ vars.BOOKING_API }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
