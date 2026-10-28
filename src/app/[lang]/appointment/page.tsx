@@ -7,6 +7,7 @@ import { hasLocale, tr } from "@/lib/i18n";
 import { PageHeader } from "@/components/Section";
 import Reveal from "@/components/Reveal";
 import AppointmentForm from "@/components/AppointmentForm";
+import QrCode from "@/components/QrCode";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
 import { calendlyEnabled } from "@/data/integrations";
 import { bookingConfigured } from "@/lib/submit";
@@ -37,6 +38,13 @@ export default async function Page({ params }: PageProps<"/[lang]/appointment">)
               </Reveal>
             ))}
           </ol>
+          <div className="card mt-6 hidden items-center gap-4 rounded-3xl! p-5 lg:flex">
+            <QrCode url={`https://${site.domain}/${lang}/appointment/`} label={u("labScanTitle", lang)} className="w-24 shrink-0 [&>svg]:h-auto [&>svg]:w-full" />
+            <span>
+              <span className="font-display block text-lg text-blue-950">{u("labScanTitle", lang)}</span>
+              <span className="mt-0.5 block text-sm text-muted">{u("labScanSub", lang)}</span>
+            </span>
+          </div>
           <p className="mt-6 text-sm text-muted">
             {u("callUs", lang)}: <a className="font-bold text-blue-700 underline" href={`tel:${site.tel}`}>{site.phoneDisplay}</a>
           </p>
