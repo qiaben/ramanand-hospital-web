@@ -13,7 +13,8 @@ export const metadata: Metadata = { title: "QR codes", robots: { index: false, f
 export default async function Page({ params }: PageProps<"/[lang]/qr">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const base = `https://${site.domain}/${lang}`;
+  // The printed codes always open the English pages, whichever language this print page is viewed in.
+  const base = `https://${site.domain}/en`;
   const cards = [
     { icon: FlaskConical, title: u("qrLab", lang), url: `${base}/lab-booking/` },
     { icon: CalendarCheck, title: u("qrAppt", lang), url: `${base}/appointment/` },
