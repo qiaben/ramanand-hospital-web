@@ -11,13 +11,13 @@ crons = ["* * * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "ramanand-bookings"
-database_id = "PASTE_THE_ID_HERE"
+database_id = "e9490d49-0764-4091-a16b-9434ab2bd2f2"
 
 [vars]
 # Websites allowed to call this service, comma separated.
 ALLOWED_ORIGINS = "https://www.ramanandhospital.com,https://qiaben.github.io,http://localhost:3000"
 # The address of this service once deployed, used in the patient's cancel link.
-PUBLIC_URL = ""
+PUBLIC_URL = "https://ramanand-booking.ramanandhosp.workers.dev"
 
 # Email, option 1 (no domain needed): the Google Apps Script web app URL from gmail-relay.gs. Leave empty to use Resend instead.
 MAIL_RELAY_URL = "https://script.google.com/macros/s/AKfycbyXK4-0Sb3paTnYa0PGtV5VHGowv9_3IDbw2w5k0QxOVa3N0LVV3K7TXY34CN_cxbT9Gg/exec"
@@ -44,7 +44,9 @@ DOCTORS_JSON = '''{
 SLOT_RULES = ""
 
 # Names of the approved WhatsApp templates (see README). The defaults are used when these are left out.
-# WA_T_BOOKED, WA_T_REMIND, WA_T_STAFF, WA_T_STAFF_REMIND
+# WA_T_BOOKED, WA_T_REMIND, WA_T_STAFF, WA_T_STAFF_REMIND, WA_T_LAB_VISIT, WA_T_LAB_HOME
+# The first staff alert name was blocked by Meta while an older version was being deleted, so the alert is registered as _v2.
+WA_T_STAFF = "staff_booking_alert_v2"
 
 # Secrets (set with `npx wrangler secret put NAME`, never written here):
 #   MAIL_RELAY_SECRET  the SECRET you set in the Google script (option 1)

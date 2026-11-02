@@ -53,8 +53,8 @@ export const facilityDetails: Record<string, FacilityDetail> = {
     ],
     goodToKnow: [
       { en: "Day care is meant for care that does not need an overnight stay.", hi: "डे केयर उस देखभाल के लिए है जिसमें रात भर रुकने की आवश्यकता नहीं होती।" },
-      { en: "To arrange a day-care visit, request an appointment or call 74044 77208. The team will guide you on timing and what to bring.", hi: "डे-केयर के लिए अपॉइंटमेंट का अनुरोध करें या 74044 77208 पर कॉल करें। टीम आपको समय और साथ लाने वाली चीज़ों के बारे में बताएगी।" },
-      { en: "In an emergency, call 112 or 74044 77208 straight away. Do not wait for an appointment.", hi: "आपातकाल में तुरंत 112 या 74044 77208 पर कॉल करें। अपॉइंटमेंट का इंतज़ार न करें।" },
+      { en: "To arrange a day-care visit, request an appointment or call 83072 07870. The team will guide you on timing and what to bring.", hi: "डे-केयर के लिए अपॉइंटमेंट का अनुरोध करें या 83072 07870 पर कॉल करें। टीम आपको समय और साथ लाने वाली चीज़ों के बारे में बताएगी।" },
+      { en: "In an emergency, call 112 or 83072 07870 straight away. Do not wait for an appointment.", hi: "आपातकाल में तुरंत 112 या 83072 07870 पर कॉल करें। अपॉइंटमेंट का इंतज़ार न करें।" },
     ],
   },
 
@@ -95,7 +95,7 @@ export const facilityDetails: Record<string, FacilityDetail> = {
     ],
     goodToKnow: [
       { en: "Your doctor will tell you which tests you need. You do not have to decide this on your own.", hi: "आपको कौन-सी जाँच चाहिए, यह आपके डॉक्टर बताएँगे। यह आपको खुद तय करने की ज़रूरत नहीं है।" },
-      { en: "The complete list of tests is being prepared. To check whether a particular test is available, call 74044 77208.", hi: "जाँचों की पूरी सूची तैयार की जा रही है। किसी विशेष जाँच की उपलब्धता जानने के लिए 74044 77208 पर कॉल करें।" },
+      { en: "The complete list of tests is being prepared. To check whether a particular test is available, call 83072 07870.", hi: "जाँचों की पूरी सूची तैयार की जा रही है। किसी विशेष जाँच की उपलब्धता जानने के लिए 83072 07870 पर कॉल करें।" },
       { en: "Ask our staff if you have any question about how to prepare for a test.", hi: "किसी जाँच की तैयारी के बारे में कोई प्रश्न हो तो हमारे स्टाफ से पूछें।" },
     ],
   },
@@ -133,7 +133,7 @@ export const facilityDetails: Record<string, FacilityDetail> = {
     ],
     goodToKnow: [
       { en: "Bring your prescription with you when you visit the pharmacy.", hi: "फार्मेसी जाते समय अपना पर्चा साथ रखें।" },
-      { en: "To check whether a particular medicine is available, ask the pharmacist or call 74044 77208.", hi: "कोई विशेष दवा उपलब्ध है या नहीं, यह जानने के लिए फार्मासिस्ट से पूछें या 74044 77208 पर कॉल करें।" },
+      { en: "To check whether a particular medicine is available, ask the pharmacist or call 83072 07870.", hi: "कोई विशेष दवा उपलब्ध है या नहीं, यह जानने के लिए फार्मासिस्ट से पूछें या 83072 07870 पर कॉल करें।" },
       { en: "Please do not stop or change a medicine without asking your doctor.", hi: "कृपया अपने डॉक्टर से पूछे बिना कोई दवा बंद न करें और न बदलें।" },
     ],
   },

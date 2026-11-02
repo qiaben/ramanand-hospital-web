@@ -14,8 +14,8 @@ export const site = {
   entity: { en: "Individual Proprietorship", hi: "व्यक्तिगत स्वामित्व (प्रोप्राइटरशिप)" } satisfies L,
   domain: "www.ramanandhospital.com",
   facilityId: "IN061165402",
-  phoneDisplay: "74044 77208",
-  tel: "+917404477208",
+  phoneDisplay: "83072 07870",
+  tel: "+918307207870",
   email: "ramanandhosp@gmail.com",
   address: {
     en: "Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103",
@@ -33,7 +33,7 @@ export const site = {
   // Laboratory and pharmacy are open longer than OPD.
   labPharmacyText: { en: "10 AM to 10 PM", hi: "सुबह 10 बजे से रात 10 बजे" } satisfies L,
   opdText: { en: "Mon to Sat · 6 PM to 10 PM", hi: "सोम से शनि · शाम 6 बजे से रात 10 बजे" } satisfies L,
-  grievance: { name: { en: "Dr. Arun Kumar", hi: "डॉ. अरुण कुमार" } satisfies L },
+  grievance: { name: { en: "Dr. Arun Kumar", hi: "डॉ. अरुण कुमार" } satisfies L, phoneDisplay: "74044 77208" },
   social: [] as { label: string; href: string }[], // PENDING: none supplied
 };
 
@@ -440,8 +440,8 @@ export const faqs = [
   {
     q: { en: "How do I request an appointment?", hi: "अपॉइंटमेंट के लिए अनुरोध कैसे करें?" },
     a: {
-      en: "Use the Request Appointment page, or call 74044 77208. Our team will contact you to confirm. No online payment is taken.",
-      hi: "अपॉइंटमेंट अनुरोध पेज का उपयोग करें, या 74044 77208 पर कॉल करें। हमारी टीम पुष्टि के लिए आपसे संपर्क करेगी। ऑनलाइन कोई भुगतान नहीं लिया जाता।",
+      en: "Use the Request Appointment page, or call 83072 07870. Our team will contact you to confirm. No online payment is taken.",
+      hi: "अपॉइंटमेंट अनुरोध पेज का उपयोग करें, या 83072 07870 पर कॉल करें। हमारी टीम पुष्टि के लिए आपसे संपर्क करेगी। ऑनलाइन कोई भुगतान नहीं लिया जाता।",
     },
   },
   {

@@ -34,16 +34,39 @@ Optional instead: Resend (resend.com) sends from a hospital-domain address but n
 
 | Template name | Sent to | Variables | English text |
 |---|---|---|---|
-| `booking_confirmed` | patient | 1 name, 2 what, 3 date, 4 time, 5 reference | `Hello {{1}}, your {{2}} is confirmed for {{3}} at {{4}}. Reference {{5}}. We will remind you 10 minutes before. Ramanand Hospital, 74044 77208.` |
-| `booking_reminder` | patient | 1 name, 2 what, 3 time | `Hello {{1}}, a reminder: your {{2}} is at {{3}}. Ramanand Hospital, 74044 77208.` |
-| `staff_booking_alert` | doctor, lab desk | 1 what, 2 patient, 3 mobile, 4 date and time, 5 reference | `New booking ({{1}}): {{2}}, mobile {{3}}, on {{4}}. Reference {{5}}.` |
-| `staff_booking_reminder` | doctor, lab desk | 1 what, 2 patient, 3 mobile, 4 time | `In 10 minutes ({{1}}): {{2}}, mobile {{3}}, at {{4}}.` |
+| `booking_confirmed` | patient | 1 name, 2 what, 3 date, 4 time, 5 reference | `Hello {{1}}, your {{2}} is confirmed for {{3}} at {{4}}. Reference {{5}}. We will remind you 10 minutes before. Ramanand Hospital, 83072 07870.` |
+| `booking_reminder` | patient | 1 name, 2 what, 3 time | `Hello {{1}}, this is a reminder from Ramanand Hospital. Your {{2}} is at {{3}}. Please arrive a few minutes early. For any help, call 83072 07870.` |
+| `staff_booking_alert_v2` | doctor, lab desk | 1 what, 2 patient, 3 mobile, 4 date and time, 5 reference | `New booking received at Ramanand Hospital. Service: {{1}}. Patient name: {{2}}. Patient mobile number: {{3}}. Date and time: {{4}}. Booking reference: {{5}}. Please check the hospital email for the full details.` |
+| `staff_booking_reminder` | doctor, lab desk | 1 what, 2 patient, 3 mobile, 4 time | `Reminder from Ramanand Hospital: a booking starts in 10 minutes. Service: {{1}}. Patient name: {{2}}. Patient mobile number: {{3}}. Time: {{4}}. Please be ready.` |
 
 Hindi texts for the two patient templates (language `hi`):
-- `booking_confirmed`: `नमस्ते {{1}}, आपका {{2}} {{3}} को {{4}} पर पक्का हो गया है। संदर्भ {{5}}। समय से 10 मिनट पहले हम आपको याद दिलाएँगे। रामानंद हॉस्पिटल, 74044 77208।`
-- `booking_reminder`: `नमस्ते {{1}}, याद दिलाना: आपका {{2}} {{3}} पर है। रामानंद हॉस्पिटल, 74044 77208।`
+- `booking_confirmed`: `नमस्ते {{1}}, आपका {{2}} {{3}} को {{4}} पर पक्का हो गया है। संदर्भ {{5}}। समय से 10 मिनट पहले हम आपको याद दिलाएँगे। रामानंद हॉस्पिटल, 83072 07870।`
+- `booking_reminder`: `नमस्ते {{1}}, रामानंद हॉस्पिटल की ओर से याद दिलाना: आपका {{2}} {{3}} पर है। कृपया कुछ मिनट पहले पहुँचें। किसी भी सहायता के लिए 83072 07870 पर कॉल करें।`
 
-Here `{{2}}` reads like "appointment with Dr. Arun Kumar" or "lab visit", so the sentences must stay worded to fit that.
+Lab bookings use their own two confirmation templates (English and Hindi each), chosen by how the sample is given: `lab_visit_confirmed` and `lab_home_confirmed`. Both take 4 variables: 1 name, 2 date, 3 time, 4 reference.
+- `lab_visit_confirmed`: `Hello {{1}}, your laboratory visit is confirmed for {{2}} at {{3}}. Reference {{4}}. Please come a few minutes early. Some tests need fasting for 8 to 12 hours (water is allowed). Ramanand Hospital, 83072 07870.`
+- `lab_home_confirmed`: `Hello {{1}}, your home sample collection is confirmed for {{2}} at {{3}}. Reference {{4}}. Our team will call you before they reach your address. Some tests need fasting for 8 to 12 hours (water is allowed). Ramanand Hospital, 83072 07870.`
+Their reminder uses `booking_reminder` and their staff alert uses `staff_booking_alert_v2`.
+
+Here `{{2}}` reads like "appointment with Dr. Arun Kumar" or "lab visit" (English), and "डॉ. अरुण कुमार के साथ अपॉइंटमेंट" or "प्रयोगशाला विज़िट" (Hindi), so the sentences must stay worded to fit that. The same templates serve doctor appointments and lab bookings.
+
+When creating each template in WhatsApp Manager: category Utility, type Text, no header, footer or buttons, and set **Type of variable to Number** (not Name), because the service sends numbered variables. Sample values for Meta's review:
+- `booking_confirmed`: Ravi Kumar, appointment with Dr. Arun Kumar, Mon 3 Nov 2026, 6:15 PM, RH-20261103-1234
+- `booking_reminder`: Ravi Kumar, appointment with Dr. Arun Kumar, 6:15 PM
+- `staff_booking_alert_v2`: appointment with Dr. Arun Kumar, Ravi Kumar, 9876543210, Mon 3 Nov 2026 6:15 PM, RH-20261103-1234
+- `staff_booking_reminder`: appointment with Dr. Arun Kumar, Ravi Kumar, 9876543210, 6:15 PM
+
+The English and Hindi versions of a patient template share the same name. If the Hindi version is not approved, the service sends the English one.
+
+The hospital's WhatsApp Business number is **83072 07870**. Messages are sent from this number, so the patient sees "Ramanand Hospital" and the number above.
+
+Checklist for the number (Meta WhatsApp Manager):
+1. Add 83072 07870 under WhatsApp, API Setup, Add phone number, and verify it with the SMS or call code.
+2. If the number is already used in the WhatsApp Business app on a phone, either choose Meta's "coexistence" onboarding (keeps the phone app working) or delete that WhatsApp account first.
+3. Copy the **Phone number ID** (not the phone number) into `WA_PHONE_ID`, and the permanent token into `WA_TOKEN`.
+4. Add a payment method in the Meta Business account. Without it, template messages are not delivered.
+5. Hindi templates are optional. If a Hindi template is not approved, the English one is sent instead.
+6. If a message does not arrive, run `npx wrangler tail` while testing. The Meta error code and reason are printed there.
 
 ### 3. Doctors
 In `wrangler.toml` fill `DOCTORS_JSON` with each doctor's email and WhatsApp number (10 digits), and the lab desk under `lab`. Put the hospital inbox in `HOSPITAL_EMAIL`.

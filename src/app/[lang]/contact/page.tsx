@@ -81,7 +81,7 @@ export default async function Page({ params }: PageProps<"/[lang]/contact">) {
               </p>
               <p className="mt-2 text-muted">{u("grievanceText", lang)}</p>
               <p className="font-display mt-1 text-2xl text-blue-950">{tr(site.grievance.name, lang)}</p>
-              <p className="text-muted">{site.phoneDisplay} · {site.email}</p>
+              <p className="text-muted">{site.grievance.phoneDisplay} · {site.email}</p>
             </div>
           </Reveal>
 
