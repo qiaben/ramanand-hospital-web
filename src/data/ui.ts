@@ -114,8 +114,8 @@ export const ui = {
   grievance: { en: "Grievance Officer", hi: "शिकायत अधिकारी" },
   grievanceText: { en: "For feedback or complaints, please contact:", hi: "सुझाव या शिकायत के लिए संपर्क करें:" },
   emergencyNote: {
-    en: "In a medical emergency, call the national emergency number 112 or reach the hospital on 74044 77208.",
-    hi: "चिकित्सा आपात स्थिति में राष्ट्रीय आपातकालीन नंबर 112 पर कॉल करें या अस्पताल से 74044 77208 पर संपर्क करें।",
+    en: "In a medical emergency, call the national emergency number 112 or reach the hospital on 83072 07870.",
+    hi: "चिकित्सा आपात स्थिति में राष्ट्रीय आपातकालीन नंबर 112 पर कॉल करें या अस्पताल से 83072 07870 पर संपर्क करें।",
   },
   enquiry: { en: "Send an enquiry", hi: "पूछताछ भेजें" },
   yourName: { en: "Your name", hi: "आपका नाम" },
@@ -156,8 +156,8 @@ export const ui = {
   submit: { en: "Submit request", hi: "अनुरोध भेजें" },
   noPayment: { en: "No payment is taken online. Fees are paid at the hospital.", hi: "ऑनलाइन कोई भुगतान नहीं लिया जाता। शुल्क अस्पताल में दिया जाता है।" },
   emergencyForm: {
-    en: "Is this an emergency? Please do not use this form. Call 112 or 74044 77208.",
-    hi: "क्या यह आपात स्थिति है? कृपया यह फ़ॉर्म न भरें। 112 या 74044 77208 पर कॉल करें।",
+    en: "Is this an emergency? Please do not use this form. Call 112 or 83072 07870.",
+    hi: "क्या यह आपात स्थिति है? कृपया यह फ़ॉर्म न भरें। 112 या 83072 07870 पर कॉल करें।",
   },
   received: { en: "Request received", hi: "अनुरोध प्राप्त हुआ" },
   receivedText: {
@@ -181,12 +181,12 @@ export const ui = {
   eGender: { en: "Please select.", hi: "कृपया चुनें।" },
   eConsent: { en: "Consent is required to submit.", hi: "भेजने के लिए सहमति आवश्यक है।" },
   eMessage: { en: "Please write a message.", hi: "कृपया संदेश लिखें।" },
-  eServer: { en: "Sorry, something went wrong. Please try again, or call us on 74044 77208.", hi: "क्षमा करें, कुछ गड़बड़ हो गई। कृपया दोबारा प्रयास करें या 74044 77208 पर कॉल करें।" },
+  eServer: { en: "Sorry, something went wrong. Please try again, or call us on 83072 07870.", hi: "क्षमा करें, कुछ गड़बड़ हो गई। कृपया दोबारा प्रयास करें या 83072 07870 पर कॉल करें।" },
   sending: { en: "Sending…", hi: "भेज रहे हैं…" },
   notSentTitle: { en: "Form service not connected yet", hi: "फ़ॉर्म सेवा अभी जुड़ी नहीं है" },
   notSentText: {
-    en: "This request has not reached the hospital. Send it by email instead, or call 74044 77208.",
-    hi: "यह अनुरोध अभी अस्पताल तक नहीं पहुँचा है। कृपया इसे ईमेल से भेजें, या 74044 77208 पर कॉल करें।",
+    en: "This request has not reached the hospital. Send it by email instead, or call 83072 07870.",
+    hi: "यह अनुरोध अभी अस्पताल तक नहीं पहुँचा है। कृपया इसे ईमेल से भेजें, या 83072 07870 पर कॉल करें।",
   },
   mailInstead: { en: "Send by email", hi: "ईमेल से भेजें" },
   bookCalendar: { en: "Pick a time on the calendar", hi: "कैलेंडर से समय चुनें" },

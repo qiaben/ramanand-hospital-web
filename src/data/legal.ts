@@ -17,8 +17,8 @@ export const privacy: { title: L; intro: L; sections: Section[] } = {
     {
       h: { en: "Who we are", hi: "हम कौन हैं" },
       p: {
-        en: "Ramanand Hospital, an individual proprietorship, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103. Phone: 74044 77208. Email: ramanandhosp@gmail.com.",
-        hi: "रामानंद हॉस्पिटल, एक व्यक्तिगत स्वामित्व (प्रोप्राइटरशिप), सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा 131103। फ़ोन: 74044 77208। ईमेल: ramanandhosp@gmail.com।",
+        en: "Ramanand Hospital, an individual proprietorship, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103. Phone: 83072 07870. Email: ramanandhosp@gmail.com.",
+        hi: "रामानंद हॉस्पिटल, एक व्यक्तिगत स्वामित्व (प्रोप्राइटरशिप), सोनीपत-नरेला रोड, अकबरपुर बरोटा, सोनीपत, हरियाणा 131103। फ़ोन: 83072 07870। ईमेल: ramanandhosp@gmail.com।",
       },
     },
     {
@@ -97,8 +97,8 @@ export const disclaimer: { title: L; intro: L; sections: Section[] } = {
     {
       h: { en: "Emergencies", hi: "आपात स्थिति" },
       p: {
-        en: "Do not use the website forms in an emergency. Call the national emergency number 112 or the hospital on 74044 77208.",
-        hi: "आपात स्थिति में वेबसाइट फ़ॉर्म का उपयोग न करें। राष्ट्रीय आपातकालीन नंबर 112 या अस्पताल को 74044 77208 पर कॉल करें।",
+        en: "Do not use the website forms in an emergency. Call the national emergency number 112 or the hospital on 83072 07870.",
+        hi: "आपात स्थिति में वेबसाइट फ़ॉर्म का उपयोग न करें। राष्ट्रीय आपातकालीन नंबर 112 या अस्पताल को 83072 07870 पर कॉल करें।",
       },
     },
     {

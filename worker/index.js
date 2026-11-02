@@ -121,16 +121,23 @@ async function sendEmail(env, d, payload) {
 
 /** One WhatsApp template message. The template must be approved in Meta's WhatsApp Manager. */
 async function sendWa(env, to, template, lang, params) {
-  const res = await fetch(`https://graph.facebook.com/v21.0/${env.WA_PHONE_ID}/messages`, {
-    method: "POST",
-    headers: { authorization: `Bearer ${env.WA_TOKEN}`, "content-type": "application/json" },
-    body: JSON.stringify({
-      messaging_product: "whatsapp",
-      to,
-      type: "template",
-      template: { name: template, language: { code: lang }, components: [{ type: "body", parameters: params.map((text) => ({ type: "text", text: String(text) })) }] },
-    }),
-  });
+  // WhatsApp rejects empty values, line breaks and long runs of spaces inside template variables.
+  const clean = params.map((text) => ({ type: "text", text: String(text ?? "").replace(/[\r\n\t]+/g, " ").replace(/ {2,}/g, " ").trim() || "-" }));
+  const post = (code) =>
+    fetch(`https://graph.facebook.com/v21.0/${env.WA_PHONE_ID}/messages`, {
+      method: "POST",
+      headers: { authorization: `Bearer ${env.WA_TOKEN}`, "content-type": "application/json" },
+      body: JSON.stringify({ messaging_product: "whatsapp", to, type: "template", template: { name: template, language: { code: code }, components: [{ type: "body", parameters: clean }] } }),
+    });
+  let res = await post(lang);
+  let err = res.ok ? null : await res.json().catch(() => ({}));
+  // The Hindi version of a template may not be approved yet: send the English one instead of sending nothing.
+  if (!res.ok && lang !== "en" && [132001, 132000].includes(err?.error?.code)) {
+    res = await post("en");
+    err = res.ok ? null : await res.json().catch(() => ({}));
+  }
+  // Visible with `npx wrangler tail`. Never logs the token.
+  if (!res.ok) console.log("WhatsApp send failed", template, String(to).slice(-4), err?.error?.code, err?.error?.message);
   return res.ok;
 }
 const waReady = (env) => !!(env.WA_TOKEN && env.WA_PHONE_ID);
@@ -138,7 +145,7 @@ const safe = (p) => p.catch(() => false);
 
 const row = (k, v) => `<tr><td style="padding:6px 14px 6px 0;color:#5b6b82">${esc(k)}</td><td style="padding:6px 0;font-weight:600">${esc(v)}</td></tr>`;
 const wrap = (inner) =>
-  `<div style="font-family:Arial,sans-serif;color:#0a2a5e;max-width:520px">${inner}<p style="margin-top:24px;color:#5b6b82;font-size:13px">Ramanand Hospital, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103. Phone 74044 77208</p></div>`;
+  `<div style="font-family:Arial,sans-serif;color:#0a2a5e;max-width:520px">${inner}<p style="margin-top:24px;color:#5b6b82;font-size:13px">Ramanand Hospital, Sonipat-Narela Road, Akbarpur Barota, Sonipat, Haryana 131103. Phone 83072 07870</p></div>`;
 
 /** The email a patient gets. One layout for doctor appointments, one for lab slots, each in English and Hindi. */
 function patientEmail(b, d, hi, cancel) {
@@ -179,7 +186,7 @@ function patientEmail(b, d, hi, cancel) {
       `<p>${L("Hello", "नमस्ते")} ${esc(b.name)}, ${L("we will remind you 10 minutes before your time.", "समय से 10 मिनट पहले हम आपको याद दिलाएँगे।")}</p>` +
       `<table>${rows.map(([k, v]) => row(k, v)).join("")}</table>` +
       `<p style="background:#eef4ff;padding:10px 12px;border-radius:8px">${esc(note)}</p>` +
-      `<p><a href="${cancel}" style="color:#0a4fd6">${L("Cancel this booking", "बुकिंग रद्द करें")}</a> &nbsp;|&nbsp; ${L("Questions? Call", "प्रश्न? फ़ोन करें")} 74044 77208</p></div>`,
+      `<p><a href="${cancel}" style="color:#0a4fd6">${L("Cancel this booking", "बुकिंग रद्द करें")}</a> &nbsp;|&nbsp; ${L("Questions? Call", "प्रश्न? फ़ोन करें")} 83072 07870</p></div>`,
   );
   return { subject, html };
 }
@@ -198,7 +205,13 @@ async function notifyBooked(env, b, base) {
     tasks.patientMail = safe(sendEmail(env, d, { to: [b.email], subject: m.subject, html: m.html }));
   }
   if (waReady(env)) {
-    tasks.whatsapp = safe(sendWa(env, `91${b.mobile}`, env.WA_T_BOOKED || "booking_confirmed", hi ? "hi" : "en", [b.name, what, date, time, b.ref]));
+    // Lab bookings have their own wording, with the fasting and home-visit notes, one for each way of giving the sample.
+    const lab = b.kind === "lab";
+    const home = lab && b.details.collection === "home";
+    const [template, params] = lab
+      ? [home ? env.WA_T_LAB_HOME || "lab_home_confirmed" : env.WA_T_LAB_VISIT || "lab_visit_confirmed", [b.name, date, time, b.ref]]
+      : [env.WA_T_BOOKED || "booking_confirmed", [b.name, what, date, time, b.ref]];
+    tasks.whatsapp = safe(sendWa(env, `91${b.mobile}`, template, hi ? "hi" : "en", params));
   }
   if (mailReady(env) && emails.length) {
     const x = b.details;
@@ -319,7 +332,7 @@ async function book(request, env, base) {
 async function cancel(url, env, base) {
   const ref = url.searchParams.get("ref") || "";
   const t = url.searchParams.get("t") || "";
-  const page = (msg) => new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ramanand Hospital</title><body style="font-family:Arial,sans-serif;max-width:480px;margin:15vh auto;padding:0 20px;color:#0a2a5e"><h2>${esc(msg)}</h2><p>Ramanand Hospital, 74044 77208</p>`, { headers: { "content-type": "text/html; charset=utf-8" } });
+  const page = (msg) => new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ramanand Hospital</title><body style="font-family:Arial,sans-serif;max-width:480px;margin:15vh auto;padding:0 20px;color:#0a2a5e"><h2>${esc(msg)}</h2><p>Ramanand Hospital, 83072 07870</p>`, { headers: { "content-type": "text/html; charset=utf-8" } });
   const b = await env.DB.prepare("SELECT * FROM bookings WHERE ref=? AND token=?").bind(ref, t).first();
   if (!b) return page("This link is not valid.");
   if (b.status === "cancelled") return page("This booking is already cancelled.");
